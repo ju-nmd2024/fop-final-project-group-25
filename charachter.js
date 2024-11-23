@@ -6,11 +6,20 @@ export class Princess {
     this.height = height;
     this.speed = speed;
   }
-
-  draw() {
-    fill(100, 150, 255); // Blue color for the princess
-    rect(this.x, this.y, this.width, this.height);// this is where we will put in the .png image of the princess
-  }
+  preload() {
+      // Loading the princess image
+      this.img = loadImage("princess.png"); // Replace with the actual path to the image
+    }
+ draw() {
+      if (this.img) {
+        // Draw the image if loaded
+        image(this.img, this.x, this.y, this.width, this.height);
+      } else {
+        // Fallback to a rectangle if image is not loaded
+        fill(100, 150, 255);
+        rect(this.x, this.y, this.width, this.height);
+      }
+    }
 
   move(walls) {
     let nextX = this.x;// puts in the new position of the charachter, memorizes it so it knows where it is currently
@@ -23,25 +32,23 @@ export class Princess {
     if (keyIsDown(DOWN_ARROW)) nextY += this.speed;
 
     // Return if there is a collision
-    if (this.collides(nextX, nextY, walls)) return;// if the charachter hits the wall it stops and "returns", it doesnt continue
-
-    // Update position if there is no collision
-    this.x = nextX;
-    this.y = nextY;
+    if (this.collides(nextX, nextY, walls) === false) {
+        this.x = nextX;
+        this.y = nextY;
+      }
   }
 
   collides(nextX, nextY, walls) {
-    for (let wall of walls) {
-      if (
-        //the following five lines of code were written through consulting chatgpt
-        nextX < wall[0] + wall[2]+wall[4]+wall[5] &&// added this check if it works
-        nextX + this.width > wall[0] &&
-        nextY < wall[1] + wall[3] &&
-        nextY + this.height > wall[1]
+      for (let wall of walls) {
+        if (
+          nextX < wall[0] + wall[2] && //charachters right edge doesnt touch the walls left edge
+          nextX + this.width > wall[0] && // charachters left edge doesnt touch the wall's right edge
+          nextY < wall[1] + wall[3] && // charachters bottom edge doesnt touch the wall's top edge
+          nextY + this.height > wall[1] // charachters top edge doesnt touch the wall's bottom edge
         ) {
-        return true; // Collision happens
+          return true; // Collision detected
+        }
       }
+      return false; // No collision
     }
-    return false; // No collision
   }
-}
