@@ -1,6 +1,4 @@
-import Point from "./point.js";
-
-export default class Direction extends Point {
+export default class Direction {
   turnLeft() {
     this.x = -1;
     this.y = 0;
