@@ -42,7 +42,7 @@ function drawPrincess() {
   rect(princessX, princessY, princessW, princessH); // player drawn
 }
 
-function movePlayer() {
+function movePrincess() {
   let nextX = princessX;
   let nextY = princessY;
 

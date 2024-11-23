@@ -1,6 +1,3 @@
 class Collectibles {
-    constructor(){
-        
-    }
-
+  constructor() {}
 }
