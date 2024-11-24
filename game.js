@@ -26,8 +26,8 @@ function draw() {
   drawWalls();
 
   // Draws the player
-  drawPlayer();
-  movePlayer();
+  drawPrincess();
+  movePrincess();
 }
 
 function drawWalls() {
