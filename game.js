@@ -6,22 +6,24 @@ function setup() {
 
   // maze walls in the array
   walls = [
-    [150, 0, 20, 300], // Vertical wall
+    [150, 0, 20, 250], // Vertical wall
     [0, 380, 400, 20], // Horizontal wall
-    [300, 50, 20, 250], // Another vertical wall
+    [380, 130, 20, 270], // Another vertical wall
     [0, 0, 20, 700], // leftside wall
     [680, 0, 20, 700], // rightside wall
     [0, 680, 620, 20], //bottom wall
-    [100, 550, 20, 150], //small vertical wall
+    [150, 550, 20, 150], //small vertical wall
     [150, 0, 550, 20], //top wall
+    [470,500,230,20],//left side small wall
+    [400,250,150,20],//small wall that pops up from the vertical wall
   ];
 
   // player variables
-  princessX = 50;
-  princessY = 50;
+  princessX = 650;
+  princessY = 670;
   princessW = 20;
   princessH = 20;
-  princessSpeed = 3;
+  princessSpeed = 5;
 }
 
 function draw() {
@@ -77,3 +79,4 @@ function collides(nextX, nextY) {
   }
   return false; // No collision
 }
+
