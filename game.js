@@ -2,13 +2,18 @@ let walls = [];
 let princessX, princessY, princessW, princessH, princessSpeed;
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(700, 700);
 
   // maze walls in the array
   walls = [
-    [100, 0, 20, 300], // Vertical wall
-    [200, 100, 150, 20], // Horizontal wall
-    [300, 200, 20, 150], // Another vertical wall
+    [150, 0, 20, 300], // Vertical wall
+    [0, 380, 400, 20], // Horizontal wall
+    [300, 50, 20, 250], // Another vertical wall
+    [0, 0, 20, 700], // leftside wall
+    [680, 0, 20, 700], // rightside wall
+    [0, 680, 620, 20], //bottom wall
+    [100, 550, 20, 150], //small vertical wall
+    [150, 0, 550, 20], //top wall
   ];
 
   // player variables
@@ -46,13 +51,13 @@ function movePrincess() {
   let nextX = princessX;
   let nextY = princessY;
 
-  // Update position based on arrow keys
+  // position of the princess moved by arrow keys
   if (keyIsDown(LEFT_ARROW)) nextX -= princessSpeed;
   if (keyIsDown(RIGHT_ARROW)) nextX += princessSpeed;
   if (keyIsDown(UP_ARROW)) nextY -= princessSpeed;
   if (keyIsDown(DOWN_ARROW)) nextY += princessSpeed;
 
-  // Only move if collides() returns false
+  // move only if it doesnt collide
   if (collides(nextX, nextY) === false) {
     princessX = nextX;
     princessY = nextY;
