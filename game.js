@@ -14,8 +14,8 @@ function setup() {
     [0, 680, 620, 20], //bottom wall
     [150, 550, 20, 150], //small vertical wall
     [150, 0, 550, 20], //top wall
-    [470,500,230,20],//left side small wall
-    [400,250,150,20],//small wall that pops up from the vertical wall
+    [470, 500, 230, 20], //left side small wall
+    [400, 250, 150, 20], //small wall that pops up from the vertical wall
   ];
 
   // player variables
@@ -79,4 +79,3 @@ function collides(nextX, nextY) {
   }
   return false; // No collision
 }
-
