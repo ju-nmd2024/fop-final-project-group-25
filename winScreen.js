@@ -1,4 +1,4 @@
-export default class Screen {
+export default class WinScreen {
   constructor(message, buttonText, buttonAction, bgImage) {
     this.message = message; // Message to display on the screen
     this.button = new Button(350, 420, 150, 50, buttonText, buttonAction);
@@ -26,6 +26,7 @@ export default class Screen {
     this.button.onMousePress();
   }
 }
+
 // Button class draw and button click logic
 class Button {
   constructor(x, y, width, height, text, onClick) {

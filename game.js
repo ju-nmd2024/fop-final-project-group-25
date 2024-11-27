@@ -80,7 +80,6 @@ function draw() {
     startScreen.draw();
   }
 }
-
 window.draw = draw;
 
 function mousePressed() {
