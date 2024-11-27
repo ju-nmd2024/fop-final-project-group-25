@@ -1,4 +1,4 @@
-class Monster {
+export default class MonsterVertical {
   constructor(y, speed) {
     this.y = y;
     this.speed = speed;
@@ -17,15 +17,15 @@ class Monster {
   }
 }
 
-let monster;
+// let monster;
 
-function setup() {
-  createCanvas(700, 700);
-  monster = new Monster(50, 3);
-}
+// function setup() {
+//   createCanvas(700, 700);
+//   monster = new Monster(50, 3);
+// }
 
-function draw() {
-  background(0);
-  monster.update(); // Update position
-  monster.draw(); // Draw the monster
-}
+// function draw() {
+//   background(0);
+//   monster.update(); // Update position
+//   monster.draw(); // Draw the monster
+// }
