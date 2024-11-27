@@ -1,26 +1,28 @@
 import MonsterVertical from "./monster-vertical.js";
+import Wall from "./walls.js"; // Import the Wall class
 
 let walls = [];
 let monster;
 let princess;
 let princessX, princessY, princessW, princessH, princessSpeed;
-let rotationAngle = 0; // keeps track of the princesss rotation
+let rotationAngle = 0; // Keeps track of the princess's rotation
 
 function setup() {
   createCanvas(700, 700);
   monster = new MonsterVertical(50, 3);
-  // Maze walls in the array
+
+  // Define walls (positions, widths, heights)
   walls = [
-    [150, 0, 20, 250], // Vertical wall
-    [0, 380, 400, 20], // Horizontal wall
-    [380, 130, 20, 270], // Another vertical wall
-    [0, 0, 10, 700], // Left side wall
-    [690, 0, 10, 700], // Right side wall
-    [0, 690, 580, 10], // Bottom wall
-    [150, 550, 20, 150], // Small vertical wall
-    [150, 0, 550, 10], // Top wall
-    [470, 500, 230, 20], // Left side small wall
-    [400, 250, 150, 20], // Small wall that pops up from the vertical wall
+    new Wall(150, 0, 20, 250), // Vertical wall
+    new Wall(0, 380, 400, 20), // Horizontal wall
+    new Wall(380, 130, 20, 270), // Another vertical wall
+    new Wall(0, 0, 10, 700), // Left side wall
+    new Wall(690, 0, 10, 700), // Right side wall
+    new Wall(0, 690, 580, 10), // Bottom wall
+    new Wall(150, 550, 20, 150), // Small vertical wall
+    new Wall(150, 0, 550, 10), // Top wall
+    new Wall(470, 500, 230, 20), // Left side small wall
+    new Wall(400, 250, 150, 20), // Small wall that pops up from the vertical wall
   ];
 
   // Player variables
@@ -42,7 +44,9 @@ function draw() {
   image(map, 0, 0);
 
   // Draw the maze
-  drawWalls();
+  for (let wall of walls) {
+    wall.draw(); // Draw each wall
+  }
 
   // Draw the player
   drawPrincess();
@@ -53,13 +57,6 @@ function draw() {
   monster.draw();
 }
 window.draw = draw;
-
-function drawWalls() {
-  fill(0, 122);
-  for (let wall of walls) {
-    rect(wall[0], wall[1], wall[2], wall[3]); //the maze walls
-  }
-}
 
 function drawPrincess() {
   push();
@@ -76,39 +73,34 @@ function movePrincess() {
   // Update the position and rotation angle based on key presses
   if (keyIsDown(LEFT_ARROW)) {
     nextX -= princessSpeed;
-    rotationAngle = -HALF_PI; // turns left
+    rotationAngle = -HALF_PI; // Turns left
   }
   if (keyIsDown(RIGHT_ARROW)) {
     nextX += princessSpeed;
-    rotationAngle = HALF_PI; //turns right)
+    rotationAngle = HALF_PI; // Turns right
   }
   if (keyIsDown(UP_ARROW)) {
     nextY -= princessSpeed;
-    rotationAngle = 0; // keeps facing up
+    rotationAngle = 0; // Keeps facing up
   }
   if (keyIsDown(DOWN_ARROW)) {
     nextY += princessSpeed;
-    rotationAngle = PI; // turns down
+    rotationAngle = PI; // Turns down
   }
 
-  // the princess moves only if there isnt collision
-  if (canMove(nextX, nextY)) {
+  // The princess moves only if there isn't a collision
+  if (!collidesWithAnyWall(nextX, nextY)) {
     princessX = nextX;
     princessY = nextY;
   }
 }
 
-// Check if the princess can move to the next position
-function canMove(nextX, nextY) {
+// Check if the princess collides with any wall
+function collidesWithAnyWall(nextX, nextY) {
   for (let wall of walls) {
-    if (
-      nextX + 15 < wall[0] + wall[2] &&
-      nextX + princessW - 15 > wall[0] &&
-      nextY < wall[1] + wall[3] &&
-      nextY + princessH > wall[1]
-    ) {
-      return false; // Collision detected, cannot move
+    if (wall.collides(nextX, nextY, princessW, princessH)) {
+      return true; // Collision detected
     }
   }
-  return true; // No collision, can move
+  return false; // No collision
 }
