@@ -17,8 +17,8 @@ export default class Screen {
     // Draw the message
     fill(255); // text
     textAlign(CENTER, CENTER);
-    textSize(32);
-    text(this.message, width / 2, height / 2 - 60);
+    textSize(14);
+    text(this.message, 350, 250, 400, 300);
 
     // Draw the button
     this.button.draw();
