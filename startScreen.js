@@ -1,24 +1,21 @@
 export default class Screen {
-  constructor(message, buttonText, buttonAction) {
+  constructor(message, buttonText, buttonAction, bgImage) {
     this.message = message; // Message to display on the screen
-    this.button = new Button(
-      width / 2,
-      height / 2 + 100,
-      150,
-      50,
-      buttonText,
-      buttonAction
-    );
+    this.button = new Button(350, 420, 150, 50, buttonText, buttonAction);
+    this.bgImage = bgImage;
+    this.menuImage = menuImage;
   }
 
   draw() {
-    background(50); // Dark background
+    //background(50); // Dark background
+    image(this.bgImage, 0, 0, 700, 700);
+    image(this.menuImage, 150, 180, 400, 320);
 
     // Draw the message
     fill(255); // text
     textAlign(CENTER, CENTER);
     textSize(32);
-    text(this.message, width / 2, height / 2 - 60);
+    text(this.message, 350, 240);
 
     // Draw the button
     this.button.draw();
@@ -42,9 +39,11 @@ class Button {
 
   draw() {
     // button
-    fill(100, 150, 255); // Button background color
+    strokeWeight(1);
+    stroke(107, 73, 43);
+    fill(86, 180, 179); // Button background color
     rectMode(CENTER);
-    rect(this.x, this.y, this.width, this.height);
+    rect(this.x, this.y, this.width, this.height, 10);
 
     //button text
     fill(255);
