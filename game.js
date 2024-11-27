@@ -69,10 +69,6 @@ function drawPrincess() {
   pop();
 }
 
-function drawMonster() {
-  image();
-}
-
 function movePrincess() {
   let nextX = princessX;
   let nextY = princessY;
