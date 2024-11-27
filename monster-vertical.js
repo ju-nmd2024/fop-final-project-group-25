@@ -1,31 +1,23 @@
 export default class MonsterVertical {
-  constructor(y, speed) {
-    this.y = y;
-    this.speed = speed;
+  constructor(x, y, speed, minY, maxY) {
+    this.x = x; // Fixed x position
+    this.y = y; // Starting y position
+    this.speed = speed; // Movement speed
+    this.minY = minY; // Minimum y boundary
+    this.maxY = maxY; // Maximum y boundary
   }
 
   update() {
-    this.y = this.y + this.speed;
-    if (this.y - 25 >= width || this.y - 25 <= 0) {
+    this.y += this.speed;
+
+    // Reverse direction when reaching the bounds
+    if (this.y >= this.maxY || this.y <= this.minY) {
       this.speed = -this.speed;
     }
   }
 
   draw() {
-    fill(255);
-    ellipse(50, this.y, 50, 50);
+    fill(255); // Monster color
+    ellipse(this.x, this.y, 50, 50); // Draw monster at its current position
   }
 }
-
-// let monster;
-
-// function setup() {
-//   createCanvas(700, 700);
-//   monster = new Monster(50, 3);
-// }
-
-// function draw() {
-//   background(0);
-//   monster.update(); // Update position
-//   monster.draw(); // Draw the monster
-// }

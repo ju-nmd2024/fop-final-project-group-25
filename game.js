@@ -1,17 +1,19 @@
 import MonsterVertical from "./monster-vertical.js";
-import Wall from "./walls.js"; // Import the Wall class
+import Wall from "./walls.js";
 
 let walls = [];
 let monster;
 let princess;
 let princessX, princessY, princessW, princessH, princessSpeed;
-let rotationAngle = 0; // Keeps track of the princess's rotation
+let rotationAngle = 0; // Tracks the princess's rotation
 
 function setup() {
   createCanvas(700, 700);
-  monster = new MonsterVertical(50, 3);
 
-  // Define walls (positions, widths, heights)
+  // Initialize the monster with configurable positions
+  monster = new MonsterVertical(200, 501, 3, 430, 640);
+
+  // Initialize walls
   walls = [
     new Wall(150, 0, 20, 250), // Vertical wall
     new Wall(0, 380, 400, 20), // Horizontal wall
@@ -25,7 +27,7 @@ function setup() {
     new Wall(400, 250, 150, 20), // Small wall that pops up from the vertical wall
   ];
 
-  // Player variables
+  // Initialize player variables
   princessX = 580;
   princessY = 580;
   princessW = 80;
@@ -41,11 +43,12 @@ function preload() {
 window.preload = preload;
 
 function draw() {
+  clear(); //to remove the princess leaving of blue scattered around the maze
   image(map, 0, 0);
 
   // Draw the maze
   for (let wall of walls) {
-    wall.draw(); // Draw each wall
+    wall.draw(); // Draw walls
   }
 
   // Draw the player
@@ -61,7 +64,7 @@ window.draw = draw;
 function drawPrincess() {
   push();
   translate(princessX + princessW / 2, princessY + princessH / 2); // Move to the center of the princess
-  rotate(rotationAngle); // Apply the rotation based on the direction
+  rotate(rotationAngle); // Rotate based on the direction
   image(princess, -princessW / 2, -princessH / 2, princessW, princessH); // Draw the princess image
   pop();
 }
@@ -88,7 +91,7 @@ function movePrincess() {
     rotationAngle = PI; // Turns down
   }
 
-  // The princess moves only if there isn't a collision
+  // Move the princess only if there isn't a collision
   if (!collidesWithAnyWall(nextX, nextY)) {
     princessX = nextX;
     princessY = nextY;
