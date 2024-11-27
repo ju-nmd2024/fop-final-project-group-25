@@ -2,6 +2,7 @@ import MonsterVertical from "./monster-vertical.js";
 import Wall from "./walls.js";
 
 let walls = [];
+let monster;
 let princess;
 let princessX, princessY, princessW, princessH, princessSpeed;
 let rotationAngle = 0; // Tracks the princess's rotation
@@ -38,7 +39,6 @@ window.setup = setup;
 function preload() {
   map = loadImage("summer-map.png");
   princess = loadImage("princess.png");
-  monster = loadImage("dragon.png");
 }
 window.preload = preload;
 
