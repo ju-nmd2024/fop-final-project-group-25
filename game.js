@@ -1,6 +1,6 @@
 import MonsterVertical from "./monster-vertical.js";
 import Wall from "./walls.js";
-import Screen from "./screen.js";
+import Screen from "./startScreen.js";
 
 let walls = [];
 let princess;

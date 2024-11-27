@@ -1,4 +1,4 @@
-export default class Screen {
+export default class RepeatScreen {
   constructor(message, buttonText, buttonAction) {
     this.message = message; // Message to display on the screen
     this.button = new Button(
@@ -14,8 +14,8 @@ export default class Screen {
   draw() {
     background(50); // Dark background
 
-    // Draw the message (centered)
-    fill(255); // White text
+    // Draw the message
+    fill(255); // text
     textAlign(CENTER, CENTER);
     textSize(32);
     text(this.message, width / 2, height / 2 - 60);
@@ -25,12 +25,11 @@ export default class Screen {
   }
 
   onMousePress() {
-    // Check if the mouse is pressed on the button
+    //mouse is pressed on the button
     this.button.onMousePress();
   }
 }
-
-// Button class to handle drawing and click logic
+// Button class drawing and click logic
 class Button {
   constructor(x, y, width, height, text, onClick) {
     this.x = x;
@@ -55,14 +54,14 @@ class Button {
   }
 
   onMousePress() {
-    // Check if the mouse is within the button's bounds and trigger onClick
+    // Check if the mouse is within the button's size and  onClick
     if (
       mouseX > this.x - this.width / 2 &&
       mouseX < this.x + this.width / 2 &&
       mouseY > this.y - this.height / 2 &&
       mouseY < this.y + this.height / 2
     ) {
-      this.onClick(); // Call the action function when pressed
+      this.onClick(); //when pressed
     }
   }
 }
