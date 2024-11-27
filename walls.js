@@ -8,7 +8,8 @@ export default class Wall {
 
   // Draw the wall
   draw() {
-    fill(0, 122); // Wall color
+    noStroke();
+    fill(0, 0); // Wall color
     rect(this.x, this.y, this.width, this.height);
   }
 

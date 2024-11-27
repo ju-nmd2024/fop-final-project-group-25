@@ -2,7 +2,6 @@ import MonsterVertical from "./monster-vertical.js";
 import Wall from "./walls.js";
 
 let walls = [];
-let monster;
 let princess;
 let princessX, princessY, princessW, princessH, princessSpeed;
 let rotationAngle = 0; // Tracks the princess's rotation
@@ -11,20 +10,20 @@ function setup() {
   createCanvas(700, 700);
 
   // Initialize the monster with configurable positions
-  monster = new MonsterVertical(200, 501, 3, 430, 640);
+  monster = new MonsterVertical(260, 501, 3, 430, 600);
 
   // Initialize walls
   walls = [
-    new Wall(150, 0, 20, 250), // Vertical wall
-    new Wall(0, 380, 400, 20), // Horizontal wall
-    new Wall(380, 130, 20, 270), // Another vertical wall
-    new Wall(0, 0, 10, 700), // Left side wall
-    new Wall(690, 0, 10, 700), // Right side wall
-    new Wall(0, 690, 580, 10), // Bottom wall
-    new Wall(150, 550, 20, 150), // Small vertical wall
-    new Wall(150, 0, 550, 10), // Top wall
-    new Wall(470, 500, 230, 20), // Left side small wall
-    new Wall(400, 250, 150, 20), // Small wall that pops up from the vertical wall
+    new Wall(175, 0, 50, 240), // Top Vertical wall
+    new Wall(0, 351, 450, 50), // Middle Horizontal wall
+    new Wall(399, 143, 50, 250), // Middle long vertical wall
+    new Wall(0, 0, 32, 700), // Left side wall
+    new Wall(671, 0, 30, 700), // Right side wall
+    new Wall(0, 672, 560, 30), // Bottom wall
+    new Wall(175, 527, 50, 150), // Bottom vertical wall
+    new Wall(180, -17, 550, 50), // Top wall
+    new Wall(495, 495, 230, 50), // Right short vertical wall
+    new Wall(400, 239, 160, 50), // Middle short horizontal wall
   ];
 
   // Initialize player variables
@@ -37,8 +36,9 @@ function setup() {
 window.setup = setup;
 
 function preload() {
-  map = loadImage("map-2.png");
+  map = loadImage("summer-map.png");
   princess = loadImage("princess.png");
+  monster = loadImage("dragon.png");
 }
 window.preload = preload;
 
@@ -67,6 +67,10 @@ function drawPrincess() {
   rotate(rotationAngle); // Rotate based on the direction
   image(princess, -princessW / 2, -princessH / 2, princessW, princessH); // Draw the princess image
   pop();
+}
+
+function drawMonster() {
+  image();
 }
 
 function movePrincess() {
