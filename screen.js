@@ -38,16 +38,16 @@ class Button {
     this.width = width;
     this.height = height;
     this.text = text;
-    this.onClick = onClick; // Function to call on button press
+    this.onClick = onClick; //to call when button is pressed
   }
 
   draw() {
-    // Draw the button
+    // button
     fill(100, 150, 255); // Button background color
     rectMode(CENTER);
     rect(this.x, this.y, this.width, this.height);
 
-    // Draw the button text
+    //button text
     fill(255);
     textAlign(CENTER, CENTER);
     textSize(20);
