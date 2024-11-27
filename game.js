@@ -1,16 +1,18 @@
 import MonsterVertical from "./monster-vertical.js";
 import Wall from "./walls.js";
+import Screen from "./screen.js";
 
 let walls = [];
 let princess;
+let monster;
 let princessX, princessY, princessW, princessH, princessSpeed;
 let rotationAngle = 0; // Tracks the princess's rotation
 
+let gameStarted = false;
+let startScreen;
+
 function setup() {
   createCanvas(700, 700);
-
-  // create the monster
-  monster = new MonsterVertical(260, 501, 3, 430, 600);
 
   // create walls
   walls = [
@@ -24,7 +26,10 @@ function setup() {
     new Wall(180, -17, 550, 50), // Top wall
     new Wall(495, 495, 230, 50), // Right short vertical wall
     new Wall(400, 239, 160, 50), // Middle short horizontal wall
+    new Wall(0, 0, 65, 30), //Tiny top horizontal wall
   ];
+
+  startScreen = new Screen("Royal Escape", "Start", startGame);
 
   //player variables
   princessX = 580;
@@ -44,22 +49,41 @@ window.preload = preload;
 
 function draw() {
   clear(); //to remove the princess leaving of blue scattered around the maze
-  image(map, 0, 0);
 
-  // Draw the maze
-  for (let wall of walls) {
-    wall.draw(); // Draw walls
+  if (gameStarted) {
+    image(map, 0, 0);
+
+    // Draw the maze
+    for (let wall of walls) {
+      wall.draw(); // Draw walls
+    }
+
+    // Draw the player
+    drawPrincess();
+    movePrincess();
+
+    // Update and draw the monster
+    monster.update();
+    monster.draw();
+  } else {
+    startScreen.draw();
   }
-
-  // Draw the player
-  drawPrincess();
-  movePrincess();
-
-  // Update and draw the monster
-  monster.update();
-  monster.draw();
 }
+
 window.draw = draw;
+
+function mousePressed() {
+  if (!gameStarted) {
+    startScreen.onMousePress();
+  }
+}
+
+function startGame() {
+  gameStarted = true;
+
+  // create the monster
+  monster = new MonsterVertical(260, 501, 3, 430, 600);
+}
 
 function drawPrincess() {
   push();
