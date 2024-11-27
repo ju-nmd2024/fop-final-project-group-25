@@ -1,52 +1,68 @@
-import Button from "./button.js";
-
 export default class Screen {
-  constructor(message) {
-    this.message = message; // Message to display
-    this.buttons = []; // empty Array of the buttons
-  }
-
-  addButton(x, y, width, height, text, onClick) {
-    // to add a new button to the screen
-    const button = new Button(x, y, width, height, text, onClick);
-    this.buttons.push(button);
+  constructor(message, buttonText, buttonAction) {
+    this.message = message; // Message to display on the screen
+    this.button = new Button(
+      width / 2,
+      height / 2 + 100,
+      150,
+      50,
+      buttonText,
+      buttonAction
+    );
   }
 
   draw() {
-    background(50);
-    fill(255);
+    background(50); // Dark background
 
-    // Draws the screen message(we should put in theguide to the game)
+    // Draw the message (centered)
+    fill(255); // White text
     textAlign(CENTER, CENTER);
     textSize(32);
     text(this.message, width / 2, height / 2 - 60);
 
-    // Draw all buttons
-    for (let button of this.buttons) {
-      button.draw();
-    }
+    // Draw the button
+    this.button.draw();
   }
 
   onMousePress() {
-    // Checks if the mouse is pressed on the first button
-    //following 3 lines of code are acquired through chatgpt
-    if (
-      mouseX > this.buttons[0].x - this.buttons[0].width / 2 &&
-      mouseX < this.buttons[0].x + this.buttons[0].width / 2 &&
-      mouseY > this.buttons[0].y - this.buttons[0].height / 2 &&
-      mouseY < this.buttons[0].y + this.buttons[0].height / 2
-    ) {
-      this.buttons[0].onClick(); // makes the button work onclick
-    }
+    // Check if the mouse is pressed on the button
+    this.button.onMousePress();
+  }
+}
 
-    // Check if the mouse is pressed on the second button
+// Button class to handle drawing and click logic
+class Button {
+  constructor(x, y, width, height, text, onClick) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.text = text;
+    this.onClick = onClick; // Function to call on button press
+  }
+
+  draw() {
+    // Draw the button
+    fill(100, 150, 255); // Button background color
+    rectMode(CENTER);
+    rect(this.x, this.y, this.width, this.height);
+
+    // Draw the button text
+    fill(255);
+    textAlign(CENTER, CENTER);
+    textSize(20);
+    text(this.text, this.x, this.y);
+  }
+
+  onMousePress() {
+    // Check if the mouse is within the button's bounds and trigger onClick
     if (
-      mouseX > this.buttons[1].x - this.buttons[1].width / 2 &&
-      mouseX < this.buttons[1].x + this.buttons[1].width / 2 &&
-      mouseY > this.buttons[1].y - this.buttons[1].height / 2 &&
-      mouseY < this.buttons[1].y + this.buttons[1].height / 2
+      mouseX > this.x - this.width / 2 &&
+      mouseX < this.x + this.width / 2 &&
+      mouseY > this.y - this.height / 2 &&
+      mouseY < this.y + this.height / 2
     ) {
-      this.buttons[1].onClick();
+      this.onClick(); // Call the action function when pressed
     }
   }
 }
