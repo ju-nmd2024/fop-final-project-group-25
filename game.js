@@ -10,6 +10,8 @@ let rotationAngle = 0; // Tracks the princess's rotation
 
 let gameStarted = false;
 let startScreen;
+let bgImage;
+let menuImage;
 
 function setup() {
   createCanvas(700, 700);
@@ -29,7 +31,13 @@ function setup() {
     new Wall(0, 0, 65, 30), //Tiny top horizontal wall
   ];
 
-  startScreen = new Screen("Royal Escape", "Start", startGame);
+  startScreen = new Screen(
+    "Royal Escape",
+    "Start",
+    startGame,
+    bgImage,
+    menuImage
+  );
 
   //player variables
   princessX = 580;
@@ -43,6 +51,9 @@ window.setup = setup;
 function preload() {
   map = loadImage("summer-map.png");
   princess = loadImage("princess.png");
+  bgImage = loadImage("blurry-background.png");
+  menuImage = loadImage("start-screen.png");
+
   //monster = loadImage("dragon.png");
 }
 window.preload = preload;
@@ -69,7 +80,6 @@ function draw() {
     startScreen.draw();
   }
 }
-
 window.draw = draw;
 
 function mousePressed() {
