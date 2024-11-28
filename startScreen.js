@@ -1,5 +1,5 @@
 export default class Screen {
-  constructor(message, buttonText, buttonAction, bgImage) {
+  constructor(message, buttonText, buttonAction, bgImage, menuImage) {
     this.message = message; // Message to display on the screen
     this.button = new Button(350, 420, 150, 50, buttonText, buttonAction);
     this.bgImage = bgImage;
@@ -12,7 +12,7 @@ export default class Screen {
 
     // Draw the message
     textFont("Courier New");
-    fill(255); // text
+    fill(255); // Text color
     textAlign(CENTER, CENTER);
     textSize(32);
     text(this.message, 350, 240);
@@ -22,11 +22,12 @@ export default class Screen {
   }
 
   onMousePress() {
-    //mouse is pressed on the button
+    //mouse press
     this.button.onMousePress();
   }
 }
-// Button class draw and button click logic
+
+// Button class
 class Button {
   constructor(x, y, width, height, text, onClick) {
     this.x = x;
@@ -34,18 +35,18 @@ class Button {
     this.width = width;
     this.height = height;
     this.text = text;
-    this.onClick = onClick; //to call when button is pressed
+    this.onClick = onClick; // Function to call when button is pressed
   }
 
   draw() {
-    // button
+    // Draw the button
     strokeWeight(1);
     stroke(107, 73, 43);
     fill(86, 180, 179); // Button background color
     rectMode(CENTER);
     rect(this.x, this.y, this.width, this.height, 10);
 
-    //button text
+    // Draw the button text
     fill(255);
     textAlign(CENTER, CENTER);
     textSize(25);
@@ -53,14 +54,14 @@ class Button {
   }
 
   onMousePress() {
-    // Check if the mouse is within the button's size and  onClick
+    // onClick of the button
     if (
       mouseX > this.x - this.width / 2 &&
       mouseX < this.x + this.width / 2 &&
       mouseY > this.y - this.height / 2 &&
       mouseY < this.y + this.height / 2
     ) {
-      this.onClick(); //when pressed
+      this.onClick(); // handles the click
     }
   }
 }

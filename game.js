@@ -13,16 +13,39 @@ let startScreen;
 let bgImage;
 let menuImage;
 
+function preload() {
+  // Load assets
+  map = loadImage("summer-map.png");
+  princess = loadImage("princess.png");
+  bgImage = loadImage("blurry-background.png");
+  menuImage = loadImage("start-screen.png");
+
+  // Uncomment if you add the monster image
+  // monster = loadImage("dragon.png");
+}
+window.preload = preload;
+
 function setup() {
   createCanvas(700, 700);
 
-  // create walls
+  // Ensure assets are loaded before creating startScreen
+  if (menuImage && bgImage) {
+    startScreen = new Screen(
+      "Royal Escape",
+      "Start",
+      startGame,
+      bgImage,
+      menuImage // Pass the loaded menuImage here
+    );
+  }
+
+  // Create walls
   walls = [
     new Wall(175, 0, 50, 240), // Top Vertical wall
     new Wall(0, 351, 450, 50), // Middle Horizontal wall
     new Wall(399, 143, 50, 250), // Middle long vertical wall
     new Wall(0, 0, 32, 700), // Left side wall
-    new Wall(671, 0, 30, 700), // Right side wall
+    new Wall(667, 0, 33, 700), // Right side wall
     new Wall(0, 672, 560, 30), // Bottom wall
     new Wall(175, 527, 50, 150), // Bottom vertical wall
     new Wall(180, -17, 550, 50), // Top wall
@@ -31,15 +54,7 @@ function setup() {
     new Wall(0, 0, 65, 30), //Tiny top horizontal wall
   ];
 
-  startScreen = new Screen(
-    "Royal Escape",
-    "Start",
-    startGame,
-    bgImage,
-    menuImage
-  );
-
-  //player variables
+  // Player variables
   princessX = 580;
   princessY = 580;
   princessW = 80;
@@ -48,18 +63,8 @@ function setup() {
 }
 window.setup = setup;
 
-function preload() {
-  map = loadImage("summer-map.png");
-  princess = loadImage("princess.png");
-  bgImage = loadImage("blurry-background.png");
-  menuImage = loadImage("start-screen.png");
-
-  //monster = loadImage("dragon.png");
-}
-window.preload = preload;
-
 function draw() {
-  clear(); //to remove the princess leaving of blue scattered around the maze
+  clear(); // Remove the princess's trail around the maze
 
   if (gameStarted) {
     image(map, 0, 0);
@@ -77,13 +82,16 @@ function draw() {
     monster.update();
     monster.draw();
   } else {
-    startScreen.draw();
+    // Ensure startScreen is only drawn if it's fully initialized
+    if (startScreen) {
+      startScreen.draw();
+    }
   }
 }
 window.draw = draw;
 
 function mousePressed() {
-  if (!gameStarted) {
+  if (!gameStarted && startScreen) {
     startScreen.onMousePress();
   }
 }
@@ -91,7 +99,7 @@ function mousePressed() {
 function startGame() {
   gameStarted = true;
 
-  // create the monster
+  // Create the monster
   monster = new MonsterVertical(260, 501, 3, 430, 600);
 }
 
@@ -107,7 +115,7 @@ function movePrincess() {
   let nextX = princessX;
   let nextY = princessY;
 
-  // position and rotation angle based on key presses
+  // Position and rotation angle based on key presses
   if (keyIsDown(LEFT_ARROW)) {
     nextX -= princessSpeed;
     rotationAngle = -HALF_PI; // Turns left
@@ -125,7 +133,7 @@ function movePrincess() {
     rotationAngle = PI; // Turns down
   }
 
-  //move only if there isnt a collision
+  // Move only if there isn't a collision
   if (!collidesWithAnyWall(nextX, nextY)) {
     princessX = nextX;
     princessY = nextY;
