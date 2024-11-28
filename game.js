@@ -1,10 +1,12 @@
 import MonsterVertical from "./monster-vertical.js";
+import MonsterHorizontal from "./monster-horizontal.js";
 import Wall from "./walls.js";
 import Screen from "./startScreen.js";
 
 let walls = [];
 let princess;
-let monster;
+let monsterVertical;
+let monsterHorizontal;
 let princessX, princessY, princessW, princessH, princessSpeed;
 let rotationAngle = 0; // Tracks the princess's rotation
 
@@ -12,6 +14,7 @@ let gameStarted = false;
 let startScreen;
 let bgImage;
 let menuImage;
+let dragonImage;
 
 function preload() {
   // Loading images
@@ -19,8 +22,7 @@ function preload() {
   princess = loadImage("princess.png");
   bgImage = loadImage("blurry-background.png");
   menuImage = loadImage("start-screen.png");
-
-  // monster = loadImage("dragon.png");
+  dragonImage = loadImage("monster.png");
 }
 window.preload = preload;
 
@@ -76,9 +78,17 @@ function draw() {
     drawPrincess();
     movePrincess();
 
-    // Update and draw the monster
-    monster.update();
-    monster.draw();
+    // Update and draw the vertical monster
+    if (monsterVertical) {
+      monsterVertical.update();
+      monsterVertical.draw();
+    }
+
+    // Update and draw the horizontal monster
+    if (monsterHorizontal) {
+      monsterHorizontal.update();
+      monsterHorizontal.draw();
+    }
   } else {
     // Ensure startScreen is only drawn if it's fully initialized
     if (startScreen) {
@@ -98,7 +108,26 @@ function startGame() {
   gameStarted = true;
 
   // Create the monster
-  monster = new MonsterVertical(260, 501, 3, 430, 600);
+  monsterVertical = new MonsterVertical(
+    220,
+    501,
+    3,
+    400,
+    560,
+    dragonImage,
+    70,
+    65
+  );
+  monsterHorizontal = new MonsterHorizontal(
+    260,
+    50,
+    3,
+    220,
+    590,
+    dragonImage,
+    70,
+    65
+  );
 }
 
 function drawPrincess() {

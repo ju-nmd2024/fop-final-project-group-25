@@ -1,10 +1,13 @@
 export default class MonsterVertical {
-  constructor(x, y, speed, minY, maxY) {
+  constructor(x, y, speed, minY, maxY, dragonImage, width, height) {
     this.x = x; // Fixed x position
     this.y = y; // Starting y position
     this.speed = speed; // Movement speed
     this.minY = minY; // Minimum y boundary
     this.maxY = maxY; // Maximum y boundary
+    this.dragonImage = dragonImage;
+    this.width = width;
+    this.height = height;
   }
 
   update() {
@@ -17,7 +20,6 @@ export default class MonsterVertical {
   }
 
   draw() {
-    fill(255); // Monster color
-    ellipse(this.x, this.y, 50, 50); // Draw monster at its current position
+    image(this.dragonImage, this.x, this.y, this.width, this.height);
   }
 }

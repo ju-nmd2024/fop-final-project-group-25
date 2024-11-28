@@ -1,31 +1,25 @@
-class Monster {
-  constructor(x, speed) {
-    this.x = x;
-    this.speed = speed;
+export default class MonsterHorizontal {
+  constructor(x, y, speed, minX, maxX, dragonImage, width, height) {
+    this.x = x; // Fixed x position
+    this.y = y; // Starting y position
+    this.speed = speed; // Movement speed
+    this.minX = minX; // Minimum y boundary
+    this.maxX = maxX; // Maximum y boundary
+    this.dragonImage = dragonImage;
+    this.width = width;
+    this.height = height;
   }
 
   update() {
-    this.x = this.x + this.speed;
-    if (this.x + 25 >= width || this.x - 25 <= 0) {
+    this.x += this.speed;
+
+    // Reverse direction when reaching the bounds
+    if (this.x >= this.maxX || this.x <= this.minX) {
       this.speed = -this.speed;
     }
   }
 
   draw() {
-    fill(255);
-    ellipse(this.x, 50, 50, 50);
+    image(this.dragonImage, this.x, this.y, this.width, this.height);
   }
-}
-
-let monster;
-
-function setup() {
-  createCanvas(700, 700);
-  monster = new Monster(50, 3);
-}
-
-function draw() {
-  background(0);
-  monster.update(); // Update position
-  monster.draw(); // Draw the monster
 }
