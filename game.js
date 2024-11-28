@@ -14,13 +14,12 @@ let bgImage;
 let menuImage;
 
 function preload() {
-  // Load assets
+  // Loading images
   map = loadImage("summer-map.png");
   princess = loadImage("princess.png");
   bgImage = loadImage("blurry-background.png");
   menuImage = loadImage("start-screen.png");
 
-  // Uncomment if you add the monster image
   // monster = loadImage("dragon.png");
 }
 window.preload = preload;
@@ -28,14 +27,13 @@ window.preload = preload;
 function setup() {
   createCanvas(700, 700);
 
-  // Ensure assets are loaded before creating startScreen
   if (menuImage && bgImage) {
     startScreen = new Screen(
       "Royal Escape",
       "Start",
       startGame,
       bgImage,
-      menuImage // Pass the loaded menuImage here
+      menuImage
     );
   }
 
@@ -64,7 +62,7 @@ function setup() {
 window.setup = setup;
 
 function draw() {
-  clear(); // Remove the princess's trail around the maze
+  clear(); // Removes the blue path princess leaves
 
   if (gameStarted) {
     image(map, 0, 0);
@@ -115,7 +113,7 @@ function movePrincess() {
   let nextX = princessX;
   let nextY = princessY;
 
-  // Position and rotation angle based on key presses
+  // Position and rotation- key presses
   if (keyIsDown(LEFT_ARROW)) {
     nextX -= princessSpeed;
     rotationAngle = -HALF_PI; // Turns left
