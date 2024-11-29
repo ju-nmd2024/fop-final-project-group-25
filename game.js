@@ -226,7 +226,7 @@ window.loseLife = loseLife;
 
 function drawLivesCounter() {
   textSize(24); // Set font size
-  fill(255, 0, 0); // Set text color (red in this case)
+  fill(255); // Set text color (red in this case)
   textAlign(RIGHT, TOP); // Align text to the top-right corner
   text("Lives: " + princessLives, width - 20, 20); // Display the lives text
 }
