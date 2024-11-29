@@ -2,6 +2,7 @@ import MonsterVertical from "./monster-vertical.js";
 import MonsterHorizontal from "./monster-horizontal.js";
 import Wall from "./walls.js";
 import Screen from "./startScreen.js";
+import RepeatScreen from "./repeatScreen.js";
 
 let walls = [];
 let princess;
@@ -15,6 +16,9 @@ let startScreen;
 let bgImage;
 let menuImage;
 let dragonImage;
+
+let princessLives = 3;
+let repeatScreen;
 
 function preload() {
   // Loading images
@@ -89,23 +93,39 @@ function draw() {
       monsterHorizontal.update();
       monsterHorizontal.draw();
     }
+    if (collidesMonster(princessX, princessY)) {
+      loseLife();
+    }
+    if (princessLives <= 0) {
+      endGame();
+    }
   } else {
-    // Ensure startScreen is only drawn if it's fully initialized
+    //startScreen is only drawn if its fully initialized
     if (startScreen) {
       startScreen.draw();
     }
   }
+  if (repeatScreen) {
+    repeatScreen.draw();
+  }
 }
+
 window.draw = draw;
 
 function mousePressed() {
   if (!gameStarted && startScreen) {
     startScreen.onMousePress();
   }
+  if (repeatScreen) {
+    repeatScreen.onMousePress();
+  }
 }
+window.mousePressed = mousePressed;
 
 function startGame() {
   gameStarted = true;
+
+  princessLives = 3;
 
   // Create the monster
   monsterVertical = new MonsterVertical(
@@ -129,6 +149,7 @@ function startGame() {
     65
   );
 }
+window.startGame = startGame;
 
 function drawPrincess() {
   push();
@@ -137,6 +158,7 @@ function drawPrincess() {
   image(princess, -princessW / 2, -princessH / 2, princessW, princessH); // Draw the princess image
   pop();
 }
+window.drawPrincess = drawPrincess;
 
 function movePrincess() {
   let nextX = princessX;
@@ -166,6 +188,7 @@ function movePrincess() {
     princessY = nextY;
   }
 }
+window.movePrincess = movePrincess;
 
 // Check if the princess collides with any wall
 function collidesWithAnyWall(nextX, nextY) {
@@ -176,3 +199,36 @@ function collidesWithAnyWall(nextX, nextY) {
   }
   return false; // No collision
 }
+window.collidesWithAnyWall = collidesWithAnyWall;
+
+function collidesMonster(nextX, nextY) {
+  if (monsterVertical.collides(nextX, nextY, princessW, princessH)) {
+    return true;
+  }
+  if (monsterHorizontal.collides(nextX, nextY, princessW, princessH)) {
+    return true;
+  }
+  return false;
+}
+window.collidesMonster = collidesMonster;
+
+function loseLife() {
+  princessLives--;
+  // Reset princess position
+  princessX = 580;
+  princessY = 580;
+  rotationAngle = 0;
+}
+window.loseLife = loseLife;
+
+function endGame() {
+  gameStarted = false;
+  repeatScreen = new RepeatScreen(
+    "Game Over! You lost all your lives",
+    "Try again",
+    startGame,
+    bgImage,
+    menuImage
+  );
+}
+window.endGame = endGame;
