@@ -16,6 +16,7 @@ let startScreen;
 let bgImage;
 let menuImage;
 let dragonImage;
+let livesBg;
 
 let princessLives = 3;
 let repeatScreen;
@@ -27,6 +28,7 @@ function preload() {
   bgImage = loadImage("blurry-background.png");
   menuImage = loadImage("start-screen.png");
   dragonImage = loadImage("monster.png");
+  livesBg = loadImage("livesBg.png");
 }
 window.preload = preload;
 
@@ -72,6 +74,7 @@ function draw() {
 
   if (gameStarted) {
     image(map, 0, 0);
+    image(livesBg, 492, 10);
 
     // Draw the maze
     for (let wall of walls) {
