@@ -16,7 +16,7 @@ export default class RepeatScreen {
   draw() {
     image(this.bgImage, 0, 0, 700, 700);
     image(this.menuImage, 150, 180, 400, 320);
-    background(50); // Dark background
+    //background(50); // Dark background
 
     // Draw the message
     textFont("Courier New");

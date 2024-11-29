@@ -22,4 +22,13 @@ export default class MonsterVertical {
   draw() {
     image(this.dragonImage, this.x, this.y, this.width, this.height);
   }
+
+  collides(nextX, nextY, princessW, princessH) {
+    return (
+      nextX + 13 < this.x + this.width &&
+      nextX + princessW - 13 > this.x &&
+      nextY + 13 < this.y + this.height &&
+      nextY + princessH - 13 > this.y
+    );
+  }
 }

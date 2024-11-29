@@ -22,4 +22,13 @@ export default class MonsterHorizontal {
   draw() {
     image(this.dragonImage, this.x, this.y, this.width, this.height);
   }
+
+  collides(nextX, nextY, princessW, princessH) {
+    return (
+      nextX < this.x + this.width &&
+      nextX + princessW > this.x &&
+      nextY < this.y + this.height &&
+      nextY + princessH > this.y
+    );
+  }
 }
