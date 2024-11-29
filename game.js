@@ -15,6 +15,7 @@ let gameStarted = false;
 let startScreen;
 let bgImage;
 let menuImage;
+let menu1Image;
 let dragonImage;
 let livesBg;
 
@@ -27,6 +28,7 @@ function preload() {
   princess = loadImage("princess.png");
   bgImage = loadImage("blurry-background.png");
   menuImage = loadImage("start-screen.png");
+  menu1Image = loadImage("repeat-screen.png");
   dragonImage = loadImage("monster.png");
   livesBg = loadImage("livesBg.png");
 }
@@ -58,6 +60,7 @@ function setup() {
     new Wall(495, 495, 230, 50), // Right short vertical wall
     new Wall(400, 239, 160, 50), // Middle short horizontal wall
     new Wall(0, 0, 65, 30), //Tiny top horizontal wall
+    new Wall(492, 10, 208, 48),
   ];
 
   // Player variables
@@ -228,10 +231,11 @@ function loseLife() {
 window.loseLife = loseLife;
 
 function drawLivesCounter() {
-  textSize(24); // Set font size
+  textSize(16); // Set font size
+  textStyle(BOLD);
   fill(255); // Set text color (red in this case)
   textAlign(RIGHT, TOP); // Align text to the top-right corner
-  text("Lives: " + princessLives, width - 20, 20); // Display the lives text
+  text("Lives: " + princessLives, 602, 24); // Display the lives text
 }
 
 function endGame() {
@@ -241,7 +245,7 @@ function endGame() {
     "Try again",
     startGame,
     bgImage,
-    menuImage
+    menu1Image
   );
 }
 window.endGame = endGame;

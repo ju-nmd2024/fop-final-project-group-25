@@ -1,14 +1,14 @@
 export default class RepeatScreen {
-  constructor(message, buttonText, buttonAction, bgImage, menuImage) {
+  constructor(message, buttonText, buttonAction, bgImage, menu1Image) {
     this.message = message; // Message to display on the screen
     this.button = new Button(350, 420, 150, 50, buttonText, buttonAction);
     this.bgImage = bgImage;
-    this.menuImage = menuImage;
+    this.menu1Image = menu1Image;
   }
 
   draw() {
     image(this.bgImage, 0, 0, 700, 700);
-    image(this.menuImage, 150, 180, 400, 320);
+    image(this.menu1Image, 150, 180, 400, 320);
     //background(50); // Dark background
 
     // Draw the message
