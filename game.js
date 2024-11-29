@@ -99,6 +99,7 @@ function draw() {
     if (princessLives <= 0) {
       endGame();
     }
+    drawLivesCounter(); //shows how many lives the princess has
   } else {
     //startScreen is only drawn if its fully initialized
     if (startScreen) {
@@ -126,6 +127,8 @@ function startGame() {
   gameStarted = true;
 
   princessLives = 3;
+
+  repeatScreen = null;
 
   // Create the monster
   monsterVertical = new MonsterVertical(
@@ -220,6 +223,13 @@ function loseLife() {
   rotationAngle = 0;
 }
 window.loseLife = loseLife;
+
+function drawLivesCounter() {
+  textSize(24); // Set font size
+  fill(255, 0, 0); // Set text color (red in this case)
+  textAlign(RIGHT, TOP); // Align text to the top-right corner
+  text("Lives: " + princessLives, width - 20, 20); // Display the lives text
+}
 
 function endGame() {
   gameStarted = false;

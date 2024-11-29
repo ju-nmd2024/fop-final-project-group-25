@@ -1,14 +1,7 @@
 export default class RepeatScreen {
   constructor(message, buttonText, buttonAction, bgImage, menuImage) {
     this.message = message; // Message to display on the screen
-    this.button = new Button(
-      width / 2,
-      height / 2 + 100,
-      150,
-      50,
-      buttonText,
-      buttonAction
-    );
+    this.button = new Button(350, 420, 150, 50, buttonText, buttonAction);
     this.bgImage = bgImage;
     this.menuImage = menuImage;
   }
@@ -23,7 +16,7 @@ export default class RepeatScreen {
     fill(255); // Text color
     textAlign(CENTER, CENTER);
     textSize(32);
-    text(this.message, 350, 240);
+    text(this.message, 350, 240, 350);
 
     // Draw the button
     this.button.draw();
@@ -47,14 +40,16 @@ class Button {
 
   draw() {
     // button
-    fill(100, 150, 255); // Button background color
+    strokeWeight(1);
+    stroke(107, 73, 43);
+    fill(86, 180, 179); // Button background color
     rectMode(CENTER);
-    rect(this.x, this.y, this.width, this.height);
+    rect(this.x, this.y, this.width, this.height, 10);
 
-    //button text
+    // Draw the button text
     fill(255);
     textAlign(CENTER, CENTER);
-    textSize(20);
+    textSize(25);
     text(this.text, this.x, this.y);
   }
 
