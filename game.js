@@ -119,6 +119,7 @@ function draw() {
       endGame();
     }
     drawLivesCounter(); //shows how many lives the princess has
+    drawStrawberryCounter();
   } else {
     //startScreen is only drawn if its fully initialized
     if (startScreen) {
