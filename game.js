@@ -5,9 +5,8 @@ import Screen from "./startScreen.js";
 import RepeatScreen from "./repeatScreen.js";
 
 let walls = [];
+let monsters = [];
 let princess;
-let monsterVertical;
-let monsterHorizontal;
 let princessX, princessY, princessW, princessH, princessSpeed;
 let rotationAngle = 0; // Tracks the princess's rotation
 
@@ -69,6 +68,11 @@ function setup() {
   princessW = 80;
   princessH = 90;
   princessSpeed = 5;
+
+  monsters = [
+    new MonsterVertical(220, 501, 3, 400, 560, dragonImage, 70, 65),
+    new MonsterHorizontal(260, 50, 3, 220, 590, dragonImage, 70, 65),
+  ];
 }
 window.setup = setup;
 
@@ -88,17 +92,11 @@ function draw() {
     drawPrincess();
     movePrincess();
 
-    // Update and draw the vertical monster
-    if (monsterVertical) {
-      monsterVertical.update();
-      monsterVertical.draw();
+    for (let monster of monsters) {
+      monster.update();
+      monster.draw();
     }
 
-    // Update and draw the horizontal monster
-    if (monsterHorizontal) {
-      monsterHorizontal.update();
-      monsterHorizontal.draw();
-    }
     if (collidesMonster(princessX, princessY)) {
       loseLife();
     }
@@ -135,28 +133,6 @@ function startGame() {
   princessLives = 3;
 
   repeatScreen = null;
-
-  // Create the monster
-  monsterVertical = new MonsterVertical(
-    220,
-    501,
-    3,
-    400,
-    560,
-    dragonImage,
-    70,
-    65
-  );
-  monsterHorizontal = new MonsterHorizontal(
-    260,
-    50,
-    3,
-    220,
-    590,
-    dragonImage,
-    70,
-    65
-  );
 }
 window.startGame = startGame;
 
@@ -211,11 +187,10 @@ function collidesWithAnyWall(nextX, nextY) {
 window.collidesWithAnyWall = collidesWithAnyWall;
 
 function collidesMonster(nextX, nextY) {
-  if (monsterVertical.collides(nextX, nextY, princessW, princessH)) {
-    return true;
-  }
-  if (monsterHorizontal.collides(nextX, nextY, princessW, princessH)) {
-    return true;
+  for (let monster of monsters) {
+    if (monster.collides(nextX, nextY, princessW, princessH)) {
+      return true; // Collision with a monster
+    }
   }
   return false;
 }
@@ -231,11 +206,13 @@ function loseLife() {
 window.loseLife = loseLife;
 
 function drawLivesCounter() {
+  push();
   textSize(16); // Set font size
   textStyle(BOLD);
   fill(255); // Set text color (red in this case)
   textAlign(RIGHT, TOP); // Align text to the top-right corner
   text("Lives: " + princessLives, 602, 24); // Display the lives text
+  pop();
 }
 
 function endGame() {
@@ -249,3 +226,15 @@ function endGame() {
   );
 }
 window.endGame = endGame;
+
+
+ 
+
+   
+  
+
+ 
+  
+
+
+ 
