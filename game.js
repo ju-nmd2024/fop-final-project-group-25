@@ -79,12 +79,6 @@ function setup() {
     new MonsterVertical(220, 501, 3, 400, 560, dragonImage, 70, 65),
     new MonsterHorizontal(260, 50, 3, 220, 590, dragonImage, 70, 65),
   ];
-
-  strawberries = [
-    new Collectibles(40, 600, 50, 50, strawberryImg),
-    new Collectibles(400, 400, 50, 50, strawberryImg),
-    new Collectibles(70, 280, 50, 50, strawberryImg),
-  ];
 }
 window.setup = setup;
 
@@ -153,6 +147,13 @@ function startGame() {
   princessLives = 3;
 
   repeatScreen = null;
+  strawberryCount = 0;
+
+  strawberries = [
+    new Collectibles(40, 600, 50, 50, strawberryImg),
+    new Collectibles(400, 400, 50, 50, strawberryImg),
+    new Collectibles(70, 280, 50, 50, strawberryImg),
+  ];
 }
 window.startGame = startGame;
 
