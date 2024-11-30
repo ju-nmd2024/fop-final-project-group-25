@@ -4,6 +4,7 @@ import Wall from "./walls.js";
 import Screen from "./startScreen.js";
 import RepeatScreen from "./repeatScreen.js";
 import Collectibles from "./collectibles.js";
+import Princess from "./princess.js";
 
 let walls = [];
 let monsters = [];
@@ -68,12 +69,7 @@ function setup() {
     new Wall(492, 10, 208, 48),
   ];
 
-  // Player variables
-  princessX = 580;
-  princessY = 580;
-  princessW = 80;
-  princessH = 90;
-  princessSpeed = 5;
+  princess = new Princess(580, 580, 80, 90, 5, princess);
 
   monsters = [
     new MonsterVertical(220, 501, 3, 400, 560, dragonImage, 70, 65),
@@ -95,8 +91,8 @@ function draw() {
     }
 
     // Draw the player
-    drawPrincess();
-    movePrincess();
+    princess.draw();
+    princess.move(walls);
 
     for (let monster of monsters) {
       monster.update();
@@ -105,17 +101,18 @@ function draw() {
 
     for (let strawberry of strawberries) {
       strawberry.draw();
-      if (strawberry.checkCollected(princessX, princessY)) {
+      if (strawberry.checkCollected(princess.x, princess.y)) {
         strawberryCount++;
       }
     }
 
-    if (collidesMonster(princessX, princessY)) {
+    if (collidesMonster(princess.x, princess.y)) {
       loseLife();
     }
     if (princessLives <= 0) {
       endGame();
     }
+
     drawLivesCounter(); //shows how many lives the princess has
     drawStrawberryCounter();
   } else {
@@ -157,75 +154,6 @@ function startGame() {
 }
 window.startGame = startGame;
 
-function drawPrincess() {
-  push();
-  translate(princessX + princessW / 2, princessY + princessH / 2); // Move to the center of the princess
-  rotate(rotationAngle); // Rotate based on the direction
-  image(princess, -princessW / 2, -princessH / 2, princessW, princessH); // Draw the princess image
-  pop();
-}
-window.drawPrincess = drawPrincess;
-
-function movePrincess() {
-  let nextX = princessX;
-  let nextY = princessY;
-
-  // Position and rotation- key presses
-  if (keyIsDown(LEFT_ARROW)) {
-    nextX -= princessSpeed;
-    rotationAngle = -HALF_PI; // Turns left
-  }
-  if (keyIsDown(RIGHT_ARROW)) {
-    nextX += princessSpeed;
-    rotationAngle = HALF_PI; // Turns right
-  }
-  if (keyIsDown(UP_ARROW)) {
-    nextY -= princessSpeed;
-    rotationAngle = 0; // Keeps facing up
-  }
-  if (keyIsDown(DOWN_ARROW)) {
-    nextY += princessSpeed;
-    rotationAngle = PI; // Turns down
-  }
-
-  // Move only if there isn't a collision
-  if (!collidesWithAnyWall(nextX, nextY)) {
-    princessX = nextX;
-    princessY = nextY;
-  }
-}
-window.movePrincess = movePrincess;
-
-// Check if the princess collides with any wall
-function collidesWithAnyWall(nextX, nextY) {
-  for (let wall of walls) {
-    if (wall.collides(nextX, nextY, princessW, princessH)) {
-      return true; // Collision detected
-    }
-  }
-  return false; // No collision
-}
-window.collidesWithAnyWall = collidesWithAnyWall;
-
-function collidesMonster(nextX, nextY) {
-  for (let monster of monsters) {
-    if (monster.collides(nextX, nextY, princessW, princessH)) {
-      return true; // Collision with a monster
-    }
-  }
-  return false;
-}
-window.collidesMonster = collidesMonster;
-
-function loseLife() {
-  princessLives--;
-  // Reset princess position
-  princessX = 580;
-  princessY = 580;
-  rotationAngle = 0;
-}
-window.loseLife = loseLife;
-
 function drawLivesCounter() {
   push();
   textSize(16); // Set font size
@@ -259,3 +187,19 @@ function endGame() {
   );
 }
 window.endGame = endGame;
+
+function loseLife() {
+  princessLives--;
+  princess.resetPosition(580, 580);
+}
+window.loseLife = loseLife;
+
+function collidesMonster(nextX, nextY) {
+  for (let monster of monsters) {
+    if (monster.collides(nextX, nextY, princess.width, princess.height)) {
+      return true;
+    }
+  }
+  return false;
+}
+window.collidesMonster = collidesMonster;
