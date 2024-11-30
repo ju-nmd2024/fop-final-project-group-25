@@ -3,6 +3,7 @@ import MonsterHorizontal from "./monster-horizontal.js";
 import Wall from "./walls.js";
 import Screen from "./startScreen.js";
 import RepeatScreen from "./repeatScreen.js";
+import Collectibles from "./collectibles.js";
 
 let walls = [];
 let monsters = [];
@@ -21,6 +22,10 @@ let livesBg;
 let princessLives = 3;
 let repeatScreen;
 
+let strawberryImg;
+let strawberries = [];
+let strawberryCount = 0;
+
 function preload() {
   // Loading images
   map = loadImage("summer-map.png");
@@ -30,6 +35,7 @@ function preload() {
   menu1Image = loadImage("repeat-screen.png");
   dragonImage = loadImage("monster.png");
   livesBg = loadImage("livesBg.png");
+  strawberryImg = loadImage("Strawberry.png");
 }
 window.preload = preload;
 
@@ -73,6 +79,8 @@ function setup() {
     new MonsterVertical(220, 501, 3, 400, 560, dragonImage, 70, 65),
     new MonsterHorizontal(260, 50, 3, 220, 590, dragonImage, 70, 65),
   ];
+
+  strawberries = [new Collectibles()];
 }
 window.setup = setup;
 
@@ -95,6 +103,13 @@ function draw() {
     for (let monster of monsters) {
       monster.update();
       monster.draw();
+    }
+
+    for (let strawberry of strawberries) {
+      strawberry.draw();
+      if (strawberry.checkCollected(princessX, princessY)) {
+        strawberryCount++;
+      }
     }
 
     if (collidesMonster(princessX, princessY)) {
@@ -215,6 +230,16 @@ function drawLivesCounter() {
   pop();
 }
 
+function drawStrawberryCounter() {
+  push();
+  textSize(16); // Set font size
+  textStyle(BOLD);
+  fill(255); // Set text color (red in this case)
+  textAlign(RIGHT, TOP); // Align text to the top-right corner
+
+  pop();
+}
+
 function endGame() {
   gameStarted = false;
   repeatScreen = new RepeatScreen(
@@ -226,15 +251,3 @@ function endGame() {
   );
 }
 window.endGame = endGame;
-
-
- 
-
-   
-  
-
- 
-  
-
-
- 
