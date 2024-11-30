@@ -8,6 +8,7 @@ export default class Collectibles {
     this.collected = false; // To track if the collectible is collected
   }
   draw() {
+    //checks if its collected or not
     if (!this.collected) {
       image(this.strawberryImg, this.x, this.y, this.width, this.height);
     }
@@ -15,10 +16,10 @@ export default class Collectibles {
 
   checkCollected(princessX, princessY) {
     if (!this.collected) {
-      if (
-        abs(this.x - princessX) < this.size / 2 &&
-        abs(this.y - princessY) < this.size / 2
-      ) {
+      let distanceX = abs(this.x - princessX);
+      let distanceY = abs(this.y - princessY);
+
+      if (distanceX < this.width / 2 && distanceY < this.height / 2) {
         this.collected = true;
         return true;
       }
