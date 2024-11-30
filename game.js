@@ -80,7 +80,7 @@ function setup() {
     new MonsterHorizontal(260, 50, 3, 220, 590, dragonImage, 70, 65),
   ];
 
-  strawberries = [new Collectibles()];
+  strawberries = [new Collectibles(40, 600, 30, 30, strawberryImg)];
 }
 window.setup = setup;
 
@@ -237,7 +237,7 @@ function drawStrawberryCounter() {
   textStyle(BOLD);
   fill(255); // Set text color (red in this case)
   textAlign(RIGHT, TOP); // Align text to the top-right corner
-
+  text(`Collected: ${strawberryCount}`, 20, 30);
   pop();
 }
 
