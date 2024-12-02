@@ -13,6 +13,7 @@ let strawberries = [];
 let strawberryCount = 0;
 
 let princess;
+let princessImage;
 let princessLives = 3;
 
 let gameStarted = false;
@@ -25,28 +26,32 @@ let menuImage;
 let menu1Image;
 let dragonImage;
 let livesBg;
-let autumnLevel;
-let winterLevel;
+let mushroomImg;
+let snowflakeImg;
+
 let strawberryImg;
 
 let levelBackgrounds = {};
+let currentBackground;
 let currentLevel = 1;
 
 function preload() {
   // Loading images
 
-  princess = loadImage("princess.png");
+  princessImage = loadImage("princess.png");
   bgImage = loadImage("blurry-background.png");
   menuImage = loadImage("start-screen.png");
   menu1Image = loadImage("repeat-screen.png");
   dragonImage = loadImage("monster.png");
   livesBg = loadImage("livesBg.png");
   strawberryImg = loadImage("Strawberry.png");
+  mushroomImg = loadImage("mushroom.png");
+  snowflakeImg = loadImage("snowflake.png");
 
   levelBackgrounds[1] = loadImage("summer-map.png");
   levelBackgrounds[2] = loadImage("autumnMap.png");
   levelBackgrounds[3] = loadImage("winter-map.png");
-  levelBackgrounds[4] = loadImage();
+  levelBackgrounds[4] = loadImage("summer-map.png");
 }
 window.preload = preload;
 
@@ -63,7 +68,7 @@ function setup() {
     );
   }
 
-  princess = new Princess(580, 580, 80, 90, 5, princess);
+  princess = new Princess(580, 580, 80, 90, 5, princessImage);
 
   loadLevel(currentLevel);
 }
@@ -73,6 +78,9 @@ function draw() {
   clear(); // Removes the blue path princess leaves
 
   if (gameStarted) {
+    if (currentBackground) {
+      image(currentBackground, 0, 0, 700, 700);
+    }
     image(livesBg, 492, 10);
 
     // Draw the maze
@@ -96,7 +104,7 @@ function draw() {
       }
     }
 
-    if (currentLevel === 1 && princess.x <= 10 && princess.y <= 10) {
+    if (currentLevel === 1 && princess.x <= 140 && princess.y <= 5) {
       nextLevel();
     } else if (currentLevel === 2 && princess.x >= 670 && princess.y <= 10) {
       nextLevel();
@@ -176,8 +184,8 @@ function loadLevel(level) {
     ];
 
     monsters = [
-      new MonsterVertical(220, 501, 3, 400, 560, dragonImage, 70, 65),
-      new MonsterHorizontal(260, 50, 3, 220, 590, dragonImage, 70, 65),
+      new MonsterVertical(220, 501, 2, 400, 560, dragonImage, 70, 65),
+      new MonsterHorizontal(260, 50, 1.5, 220, 590, dragonImage, 70, 65),
     ];
 
     strawberries = [
@@ -189,32 +197,38 @@ function loadLevel(level) {
     princess.resetPosition(580, 580);
   } else if (level === 2) {
     walls = [
-      new Wall(175, 0, 50, 240), // Top Vertical wall
-      new Wall(0, 351, 450, 50), // Middle Horizontal wall
-      new Wall(399, 143, 50, 250), // Middle long vertical wall
-      new Wall(0, 0, 32, 700), // Left side wall
-      new Wall(667, 0, 33, 700), // Right side wall
-      new Wall(0, 672, 560, 30), // Bottom wall
-      new Wall(175, 527, 50, 150), // Bottom vertical wall
-      new Wall(180, -17, 550, 50), // Top wall
-      new Wall(495, 495, 230, 50), // Right short vertical wall
+      new Wall(0, 0, 520, 35), // Top Vertical wall
+      new Wall(0, 0, 35, 700), // Middle Horizontal wall
+      new Wall(0, 670, 67, 35), // Middle long vertical wall
+      new Wall(175, 670, 500, 35), // Left side wall
+      new Wall(205, 550, 55, 145), // Right side wall
+      new Wall(205, 510, 216, 55), // Bottom wall
+      new Wall(30, 335, 245, 50), // Bottom vertical wall
+      new Wall(157, 158, 360, 55), // Top wall
+      new Wall(380, 188, 55, 150), // Right short vertical wall
       new Wall(400, 239, 160, 50), // Middle short horizontal wall
-      new Wall(0, 0, 65, 30), //Tiny top horizontal wall
-      new Wall(492, 10, 208, 48),
+      new Wall(407, 284, 300, 55), //Tiny top horizontal wall
+      new Wall(407, 284, 300, 55),
+      new Wall(670, 20, 55, 680),
+      new Wall(560, 465, 300, 45),
+      new Wall(624, 0, 300, 33),
     ];
 
     monsters = [
-      new MonsterVertical(220, 501, 3, 400, 560, dragonImage, 70, 65),
-      new MonsterHorizontal(260, 50, 3, 220, 590, dragonImage, 70, 65),
+      new MonsterVertical(550, 40, 1.1, 40, 200, dragonImage, 70, 65),
+      new MonsterHorizontal(300, 570, 1, 300, 430, dragonImage, 70, 65), //monsnterlowest?
+      new MonsterHorizontal(330, 370, 1.5, 330, 570, dragonImage, 70, 65),
     ];
 
     strawberries = [
-      new Collectibles(40, 600, 50, 50, strawberryImg),
-      new Collectibles(400, 400, 50, 50, strawberryImg),
-      new Collectibles(70, 280, 50, 50, strawberryImg),
+      new Collectibles(40, 600, 50, 50, mushroomImg),
+      new Collectibles(600, 520, 50, 50, mushroomImg),
+      new Collectibles(100, 400, 50, 50, mushroomImg),
+      new Collectibles(150, 220, 50, 50, mushroomImg),
+      new Collectibles(290, 90, 50, 50, mushroomImg),
     ];
 
-    princess.resetPosition(600, 600);
+    princess.resetPosition(100, 680);
 
     currentBackground = levelBackgrounds[2];
   } else if (level === 3) {
@@ -234,7 +248,7 @@ function loadLevel(level) {
     ];
 
     monsters = [
-      new MonsterVertical(220, 501, 3, 400, 560, dragonImage, 70, 65),
+      new MonsterVertical(450, 501, 3, 400, 560, dragonImage, 70, 65),
       new MonsterHorizontal(260, 50, 3, 220, 590, dragonImage, 70, 65),
     ];
 
