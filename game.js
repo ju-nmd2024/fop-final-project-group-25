@@ -28,7 +28,7 @@ let dragonImage;
 let livesBg;
 let mushroomImg;
 let snowflakeImg;
-
+let collectiblesImg;
 let strawberryImg;
 
 let levelBackgrounds = {};
@@ -38,7 +38,7 @@ let currentLevel = 1;
 function preload() {
   // Loading images
 
-  princessImage = loadImage("princess.png");
+  princessImage = loadImage("princess-front.png");
   bgImage = loadImage("blurry-background.png");
   menuImage = loadImage("start-screen.png");
   menu1Image = loadImage("repeat-screen.png");
@@ -47,6 +47,7 @@ function preload() {
   strawberryImg = loadImage("Strawberry.png");
   mushroomImg = loadImage("mushroom.png");
   snowflakeImg = loadImage("snowflake.png");
+  collectiblesImg = loadImage("collectibles.png");
 
   levelBackgrounds[1] = loadImage("summer-map.png");
   levelBackgrounds[2] = loadImage("autumnMap.png");
@@ -68,7 +69,7 @@ function setup() {
     );
   }
 
-  princess = new Princess(580, 580, 80, 90, 5, princessImage);
+  princess = new Princess(580, 580, 55, 85, 5, princessImage);
 
   loadLevel(currentLevel);
 }
@@ -216,7 +217,7 @@ function loadLevel(level) {
 
     monsters = [
       new MonsterVertical(550, 40, 1.1, 40, 200, dragonImage, 70, 65),
-      new MonsterHorizontal(300, 570, 1, 300, 430, dragonImage, 70, 65), //monsnterlowest?
+      new MonsterHorizontal(300, 590, 1, 300, 430, dragonImage, 70, 65), //monsnterlowest?
       new MonsterHorizontal(330, 370, 1.5, 330, 570, dragonImage, 70, 65),
     ];
 
@@ -335,7 +336,7 @@ function drawLivesCounter() {
 
 function drawStrawberryCounter() {
   push();
-  image(strawberryImg, 615, 12, 40, 40);
+  image(collectiblesImg, 615, 12, 40, 40);
   textSize(16);
   textStyle(BOLD);
   fill(255);
