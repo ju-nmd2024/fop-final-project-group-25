@@ -5,13 +5,11 @@ import Screen from "./startScreen.js";
 import RepeatScreen from "./repeatScreen.js";
 import Collectibles from "./collectibles.js";
 import Princess from "./princess.js";
+import WinScreen from "./winScreen.js";
 
 let walls = [];
 let monsters = [];
 let princess;
-let princessX, princessY, princessW, princessH, princessSpeed;
-let rotationAngle = 0; // Tracks the princess's rotation
-
 let gameStarted = false;
 let startScreen;
 let bgImage;
@@ -19,10 +17,10 @@ let menuImage;
 let menu1Image;
 let dragonImage;
 let livesBg;
-
+let autumnLevel;
+let winterLevel;
 let princessLives = 3;
 let repeatScreen;
-
 let strawberryImg;
 let strawberries = [];
 let strawberryCount = 0;
@@ -37,6 +35,8 @@ function preload() {
   dragonImage = loadImage("monster.png");
   livesBg = loadImage("livesBg.png");
   strawberryImg = loadImage("Strawberry.png");
+  autumnLevel = loadImage("autumnMap.png");
+  winterLevel = loadImage("winter-map.png");
 }
 window.preload = preload;
 
@@ -156,21 +156,21 @@ window.startGame = startGame;
 
 function drawLivesCounter() {
   push();
-  textSize(16); // Set font size
+  textSize(16);
   textStyle(BOLD);
-  fill(255); // Set text color (red in this case)
-  textAlign(RIGHT, TOP); // Align text to the top-right corner
-  text("Lives: " + princessLives, 602, 24); // Display the lives text
+  fill(255); // text color
+  textAlign(RIGHT, TOP);
+  text("Lives: " + princessLives, 602, 24); //the lives text
   pop();
 }
 
 function drawStrawberryCounter() {
   push();
   image(strawberryImg, 615, 12, 40, 40);
-  textSize(16); // Set font size
+  textSize(16);
   textStyle(BOLD);
-  fill(255); // Set text color (red in this case)
-  textAlign(RIGHT, TOP); // Align text to the top-right corner
+  fill(255);
+  textAlign(RIGHT, TOP);
 
   text(`: ${strawberryCount}`, 680, 24);
   pop();

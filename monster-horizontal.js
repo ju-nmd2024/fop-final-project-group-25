@@ -1,7 +1,7 @@
 export default class MonsterHorizontal {
   constructor(x, y, speed, minX, maxX, dragonImage, width, height) {
-    this.x = x; // Fixed x position
-    this.y = y; // Starting y position
+    this.x = x;
+    this.y = y;
     this.speed = speed; // Movement speed
     this.minX = minX; // Minimum y boundary
     this.maxX = maxX; // Maximum y boundary
@@ -13,7 +13,7 @@ export default class MonsterHorizontal {
   update() {
     this.x += this.speed;
 
-    // Reverse direction when reaching the bounds
+    // Reverses direction when reaching the walls
     if (this.x >= this.maxX || this.x <= this.minX) {
       this.speed = -this.speed;
     }

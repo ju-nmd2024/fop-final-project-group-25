@@ -58,7 +58,7 @@ export default class Princess {
     }
     return false; // No collision
   }
-
+  //resetting when losing a life
   resetPosition(startX, startY) {
     this.x = startX;
     this.y = startY;

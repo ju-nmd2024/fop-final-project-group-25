@@ -18,7 +18,7 @@ export default class Collectibles {
     if (!this.collected) {
       let distanceX = abs(this.x - princessX);
       let distanceY = abs(this.y - princessY);
-
+      // the following line of code was written using help from chatgpt
       if (distanceX < this.width / 2 && distanceY < this.height / 2) {
         this.collected = true;
         return true;
