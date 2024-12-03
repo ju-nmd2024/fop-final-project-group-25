@@ -35,10 +35,7 @@ let collectiblesImg;
 let strawberryImg;
 let flowerImg;
 let castleImg;
-<<<<<<< HEAD
 let castle = null;
-=======
->>>>>>> 1d76b8745c768026d07f2e0ec8a94467762ebd07
 
 let dragonSummer;
 let dragonAutumn;
@@ -203,15 +200,7 @@ function nextLevel() {
 window.nextLevel = nextLevel;
 
 function winGame() {
-<<<<<<< HEAD
   gameStarted = false; //stops the game
-=======
-  gameStarted = false;
-  walls = [];
-  monsters = [];
-  strawberries = [];
-  currentBackground = null;
->>>>>>> 1d76b8745c768026d07f2e0ec8a94467762ebd07
   winScreen = new WinScreen(
     "Congratulations!",
     "You have successfully helped the princess find her way home!",
@@ -354,11 +343,7 @@ function loadLevel(level) {
 
     monsters = [
       new MonsterVertical(520, 501, 1.3, 400, 560, dragonSpring, 70, 65),
-<<<<<<< HEAD
       new MonsterVertical(240, 350, 1.3, 210, 380, dragonSpring, 70, 65), // the one that doesnt move
-=======
-      new MonsterVertical(240, 350, 1.2, 210, 380, dragonSpring, 70, 65), // the one that doesnt move
->>>>>>> 1d76b8745c768026d07f2e0ec8a94467762ebd07
       new MonsterHorizontal(40, 40, 1, 40, 390, dragonSpring, 70, 65), //needs to be moved
     ];
 
