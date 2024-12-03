@@ -1,19 +1,18 @@
 export default class Princess {
-  constructor(x, y, width, height, speed, image) {
+  constructor(x, y, width, height, speed, images) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
     this.speed = speed;
-    this.image = image;
-    this.rotationAngle = 0;
+    this.images = images;
+    this.currentImage = images.down;
   }
   draw() {
     push();
     translate(this.x + this.width / 2, this.y + this.height / 2);
-    rotate(this.rotationAngle);
     image(
-      this.image,
+      this.currentImage,
       -this.width / 2,
       -this.height / 2,
       this.width,
@@ -27,22 +26,22 @@ export default class Princess {
     let nextY = this.y;
 
     // Position and rotation- key presses
-    //arrow key movement inspired by a youtube video at: https://www.youtube.com/watch?v=SatRryVpAKE
+
     if (keyIsDown(LEFT_ARROW)) {
       nextX -= this.speed;
-      this.rotationAngle = -HALF_PI; // Turns left
+      this.currentImage = this.images.left;
     }
     if (keyIsDown(RIGHT_ARROW)) {
       nextX += this.speed;
-      this.rotationAngle = HALF_PI; // Turns right
+      this.currentImage = this.images.right;
     }
     if (keyIsDown(UP_ARROW)) {
       nextY -= this.speed;
-      this.rotationAngle = 0; // Keeps facing up
+      this.currentImage = this.images.up;
     }
     if (keyIsDown(DOWN_ARROW)) {
       nextY += this.speed;
-      this.rotationAngle = PI; // Turns down
+      this.currentImage = this.images.down;
     }
 
     // Move only if there isn't a collision
@@ -51,6 +50,7 @@ export default class Princess {
       this.y = nextY;
     }
   }
+
   //the lines of code connected to princesss collision with the walls were inspired by chatgpt at this link https://chatgpt.com/c/674ee26b-07c4-8003-be98-b0d7f0068d59
   collidesWithAnyWall(nextX, nextY, walls) {
     for (let wall of walls) {
@@ -60,10 +60,11 @@ export default class Princess {
     }
     return false; // No collision
   }
+
   //resetting when losing a life
   resetPosition(startX, startY) {
     this.x = startX;
     this.y = startY;
-    this.rotationAngle = 0; // Reset rotation
+    this.currentImage = this.images.down;
   }
 }

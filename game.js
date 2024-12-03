@@ -12,8 +12,11 @@ let monsters = [];
 let strawberries = [];
 let strawberryCount = 0;
 
+let princessUpImage;
+let princessDownImage;
+let princessLeftImage;
+let princessRightImage;
 let princess;
-let princessImage;
 let princessLives = 3;
 
 let gameStarted = false;
@@ -32,6 +35,11 @@ let collectiblesImg;
 let strawberryImg;
 let flowerImg;
 
+let dragonSummer;
+let dragonAutumn;
+let dragonWinter;
+let dragonSpring;
+
 let levelBackgrounds = {};
 let currentBackground;
 let currentLevel = 1;
@@ -40,8 +48,11 @@ let collecting = 0; //variable to count the lives for increasing with collectibl
 
 function preload() {
   // Loading images
+  princessUpImage = loadImage("princess-back.png");
+  princessDownImage = loadImage("princess-front.png");
+  princessLeftImage = loadImage("princess-left.png");
+  princessRightImage = loadImage("princess-right.png");
 
-  princessImage = loadImage("princess-front.png");
   bgImage = loadImage("blurry-background.png");
   menuImage = loadImage("start-screen.png");
   menu1Image = loadImage("repeat-screen.png");
@@ -52,6 +63,11 @@ function preload() {
   snowflakeImg = loadImage("snowflake.png");
   collectiblesImg = loadImage("collectibles.png");
   flowerImg = loadImage("flower.png");
+
+  dragonSummer = loadImage("monster-summer.png");
+  dragonAutumn = loadImage("monster-autumn.png");
+  dragonWinter = loadImage("monster-winter.png");
+  dragonSpring = loadImage("monster-spring.png");
 
   levelBackgrounds[1] = loadImage("summer-map.png");
   levelBackgrounds[2] = loadImage("autumnMap.png");
@@ -74,7 +90,12 @@ function setup() {
     );
   }
 
-  princess = new Princess(580, 580, 55, 85, 5, princessImage);
+  princess = new Princess(580, 580, 55, 85, 5, {
+    up: princessUpImage,
+    down: princessDownImage,
+    left: princessLeftImage,
+    right: princessRightImage,
+  });
 
   loadLevel(currentLevel);
 }
@@ -190,8 +211,8 @@ function loadLevel(level) {
     ];
 
     monsters = [
-      new MonsterVertical(220, 501, 2, 400, 560, dragonImage, 70, 65),
-      new MonsterHorizontal(260, 50, 1.5, 220, 590, dragonImage, 70, 65),
+      new MonsterVertical(220, 501, 2, 400, 560, dragonSummer, 70, 65),
+      new MonsterHorizontal(260, 50, 1.5, 220, 590, dragonSummer, 70, 65),
     ];
 
     strawberries = [
@@ -221,9 +242,9 @@ function loadLevel(level) {
     ];
 
     monsters = [
-      new MonsterVertical(550, 50, 1.1, 50, 200, dragonImage, 70, 65),
-      new MonsterHorizontal(300, 590, 1, 300, 430, dragonImage, 70, 65), //monsterlowest?
-      new MonsterHorizontal(330, 370, 1.5, 330, 570, dragonImage, 70, 65),
+      new MonsterVertical(550, 50, 1.1, 50, 200, dragonAutumn, 70, 65),
+      new MonsterHorizontal(300, 590, 1, 300, 430, dragonAutumn, 70, 65), //monsterlowest?
+      new MonsterHorizontal(330, 370, 1.5, 330, 570, dragonAutumn, 70, 65),
     ];
 
     strawberries = [
@@ -254,12 +275,13 @@ function loadLevel(level) {
       new Wall(223, 496, 110, 50),
       new Wall(480, 464, 50, 240),
       new Wall(480, 673, 230, 32),
+      new Wall(160, 144, 110, 50),
     ];
 
     monsters = [
-      new MonsterVertical(136, 386, 2, 210, 610, dragonImage, 70, 65),
-      new MonsterHorizontal(350, 356, 1.1, 350, 600, dragonImage, 70, 65),
-      new MonsterVertical(516, 75, 1.1, 75, 225, dragonImage, 70, 65),
+      new MonsterVertical(136, 386, 2, 210, 610, dragonWinter, 70, 65),
+      new MonsterHorizontal(350, 356, 1.1, 350, 600, dragonWinter, 70, 65),
+      new MonsterVertical(516, 75, 1.1, 75, 225, dragonWinter, 70, 65),
     ];
 
     strawberries = [
@@ -290,9 +312,9 @@ function loadLevel(level) {
     ];
 
     monsters = [
-      new MonsterVertical(520, 501, 0.7, 400, 560, dragonImage, 70, 65),
-      new MonsterVertical(280, 380, 0.7, 300, 380, dragonImage, 70, 65), // the one that doesnt move
-      new MonsterHorizontal(40, 40, 1, 40, 390, dragonImage, 70, 65), //needs to be moved
+      new MonsterVertical(520, 501, 0.7, 400, 560, dragonSpring, 70, 65),
+      new MonsterVertical(280, 380, 0.7, 300, 380, dragonSpring, 70, 65), // the one that doesnt move
+      new MonsterHorizontal(40, 40, 1, 40, 390, dragonSpring, 70, 65), //needs to be moved
     ];
 
     strawberries = [

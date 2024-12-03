@@ -16,10 +16,10 @@ export default class Wall {
   // Check if a point collides with this wall
   collides(nextX, nextY, princessW, princessH) {
     return (
-      nextX + 13 < this.x + this.width &&
-      nextX + princessW - 13 > this.x &&
-      nextY + 13 < this.y + this.height &&
-      nextY + princessH - 13 > this.y
+      nextX + 8 < this.x + this.width &&
+      nextX + princessW - 8 > this.x &&
+      nextY + 8 < this.y + this.height &&
+      nextY + princessH - 8 > this.y
     );
   }
 }
