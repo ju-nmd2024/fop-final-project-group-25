@@ -27,7 +27,7 @@ export default class Princess {
     let nextY = this.y;
 
     // Position and rotation- key presses
-    //arrow key movement inspired by Garrits video at: https://pixelkind.github.io/foundationsofprogramming//programming/12-03-example
+    //arrow key movement inspired by a youtube video at: https://www.youtube.com/watch?v=SatRryVpAKE
     if (keyIsDown(LEFT_ARROW)) {
       nextX -= this.speed;
       this.rotationAngle = -HALF_PI; // Turns left

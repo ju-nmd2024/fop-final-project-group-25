@@ -35,6 +35,8 @@ let levelBackgrounds = {};
 let currentBackground;
 let currentLevel = 1;
 
+let collecting = 0; //variable to count the lives for increasing with collectibles
+
 function preload() {
   // Loading images
 
@@ -198,7 +200,7 @@ function loadLevel(level) {
     princess.resetPosition(580, 580);
   } else if (level === 2) {
     walls = [
-      new Wall(0, 0, 520, 35),
+      new Wall(0, 0, 370, 35),
       new Wall(0, 0, 35, 700),
       new Wall(0, 670, 67, 35),
       new Wall(175, 670, 500, 35),
@@ -212,7 +214,7 @@ function loadLevel(level) {
       new Wall(407, 284, 300, 55),
       new Wall(670, 20, 55, 680),
       new Wall(560, 465, 300, 45),
-      new Wall(624, 0, 300, 33),
+      new Wall(480, 0, 220, 33),
     ];
 
     monsters = [
@@ -344,6 +346,11 @@ function drawStrawberryCounter() {
   textAlign(RIGHT, TOP);
 
   text(`: ${strawberryCount}`, 680, 24);
+  //increases by 1 life is she collects more then 7 collectibles
+  if (strawberryCount >= collecting + 7) {
+    princessLives++;
+    collecting += 7;
+  }
   pop();
 }
 
@@ -361,7 +368,15 @@ window.endGame = endGame;
 
 function loseLife() {
   princessLives--;
-  princess.resetPosition(580, 580);
+  if (currentLevel === 1) {
+    princess.resetPosition(580, 580);
+  } else if (currentLevel === 2) {
+    princess.resetPosition(100, 580);
+  } else if (currentLevel === 3) {
+    princess.resetPosition(100, 600);
+  } else if (currentLevel === 4) {
+    princess.resetPosition(580, 580);
+  }
 }
 window.loseLife = loseLife;
 
