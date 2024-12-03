@@ -34,6 +34,7 @@ let snowflakeImg;
 let collectiblesImg;
 let strawberryImg;
 let flowerImg;
+let castleImg;
 
 let dragonSummer;
 let dragonAutumn;
@@ -63,6 +64,7 @@ function preload() {
   snowflakeImg = loadImage("snowflake.png");
   collectiblesImg = loadImage("collectibles.png");
   flowerImg = loadImage("flower.png");
+  castleImg = loadImage("castle.png");
 
   dragonSummer = loadImage("monster-summer.png");
   dragonAutumn = loadImage("monster-autumn.png");
@@ -137,6 +139,8 @@ function draw() {
       nextLevel();
     } else if (currentLevel === 3 && princess.x >= 205 && princess.y <= 10) {
       nextLevel();
+    } else if (currentLevel === 4 && princess.x >= 300 && princess.y <= 10) {
+      winGame();
     }
 
     if (collidesMonster(princess.x, princess.y)) {
@@ -149,16 +153,16 @@ function draw() {
     drawLivesCounter(); //shows how many lives the princess has
     drawStrawberryCounter();
   } else {
-    //startScreen is only drawn if its fully initialized
+    // Draw appropriate screen if game is not running
     if (startScreen) {
       startScreen.draw();
     }
-  }
-  if (repeatScreen) {
-    repeatScreen.draw();
-  }
-  if (winScreen) {
-    winScreen.draw();
+    if (repeatScreen) {
+      repeatScreen.draw();
+    }
+    if (winScreen) {
+      winScreen.draw();
+    }
   }
 }
 
@@ -167,10 +171,10 @@ window.draw = draw;
 function nextLevel() {
   currentLevel++;
 
-  if (currentLevel > 4) {
-    winGame();
-    return;
-  }
+  // if (currentLevel > 4) {
+  // winGame();
+  // return;
+  //}
 
   loadLevel(currentLevel); // Load the next level
 }
@@ -178,7 +182,11 @@ window.nextLevel = nextLevel;
 
 function winGame() {
   gameStarted = false;
-  winScreen = new Screen(
+  walls = [];
+  monsters = [];
+  strawberries = [];
+  currentBackground = null;
+  winScreen = new WinScreen(
     "Congratulations!",
     "Play Again",
     startGame,
@@ -297,6 +305,7 @@ function loadLevel(level) {
 
     currentBackground = levelBackgrounds[3];
   } else if (level === 4) {
+    image(castleImg, 300, 300);
     walls = [
       new Wall(0, 0, 222, 30), // Top Vertical wall
       new Wall(0, 0, 30, 704), // Middle Horizontal wall
@@ -312,8 +321,8 @@ function loadLevel(level) {
     ];
 
     monsters = [
-      new MonsterVertical(520, 501, 0.7, 400, 560, dragonSpring, 70, 65),
-      new MonsterVertical(280, 380, 0.7, 300, 380, dragonSpring, 70, 65), // the one that doesnt move
+      new MonsterVertical(520, 501, 1.3, 400, 560, dragonSpring, 70, 65),
+      new MonsterVertical(240, 350, 1.2, 210, 380, dragonSpring, 70, 65), // the one that doesnt move
       new MonsterHorizontal(40, 40, 1, 40, 390, dragonSpring, 70, 65), //needs to be moved
     ];
 
