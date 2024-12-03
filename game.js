@@ -54,7 +54,7 @@ function preload() {
   levelBackgrounds[1] = loadImage("summer-map.png");
   levelBackgrounds[2] = loadImage("autumnMap.png");
   levelBackgrounds[3] = loadImage("winter-map.png");
-  levelBackgrounds[4] = loadImage("summer-map.png");
+  levelBackgrounds[4] = loadImage("spring-map2.png");
 }
 window.preload = preload;
 
@@ -109,9 +109,9 @@ function draw() {
 
     if (currentLevel === 1 && princess.x <= 140 && princess.y <= 5) {
       nextLevel();
-    } else if (currentLevel === 2 && princess.x >= 670 && princess.y <= 10) {
+    } else if (currentLevel === 2 && princess.x >= 370 && princess.y <= 10) {
       nextLevel();
-    } else if (currentLevel === 3 && princess.x <= 50 && princess.y <= 10) {
+    } else if (currentLevel === 3 && princess.x >= 205 && princess.y <= 10) {
       nextLevel();
     }
 
@@ -237,48 +237,53 @@ function loadLevel(level) {
     currentBackground = levelBackgrounds[2];
   } else if (level === 3) {
     walls = [
-      new Wall(175, 0, 50, 240), // Top Vertical wall
-      new Wall(0, 351, 450, 50), // Middle Horizontal wall
-      new Wall(399, 143, 50, 250), // Middle long vertical wall
-      new Wall(0, 0, 32, 700), // Left side wall
-      new Wall(667, 0, 33, 700), // Right side wall
-      new Wall(0, 672, 560, 30), // Bottom wall
-      new Wall(175, 527, 50, 150), // Bottom vertical wall
-      new Wall(180, -17, 550, 50), // Top wall
-      new Wall(495, 495, 230, 50), // Right short vertical wall
-      new Wall(400, 239, 160, 50), // Middle short horizontal wall
-      new Wall(0, 0, 65, 30), //Tiny top horizontal wall
-      new Wall(492, 10, 208, 48),
+      new Wall(0, 0, 205, 32), // Top Vertical wall
+      new Wall(0, 0, 32, 700), // Middle Horizontal wall
+      new Wall(0, 672, 368, 32), // Middle long vertical wall
+      new Wall(0, 287, 80, 50), // Left side wall
+      new Wall(321, 0, 383, 32), // Right side wall
+      new Wall(448, 0, 50, 160), // Bottom wall
+      new Wall(672, 0, 32, 700), // Bottom vertical wall
+      new Wall(672, 0, 32, 700), // Top wall
+      new Wall(271, 146, 50, 145), // Right short vertical wall
+      new Wall(227, 287, 480, 50), // Middle short horizontal wall
+      new Wall(223, 287, 50, 256), //Tiny top horizontal wall
+      new Wall(223, 496, 110, 50),
+      new Wall(480, 464, 50, 240),
+      new Wall(480, 673, 230, 32),
     ];
 
     monsters = [
-      new MonsterVertical(450, 501, 3, 400, 560, dragonImage, 70, 65),
-      new MonsterHorizontal(260, 50, 3, 220, 590, dragonImage, 70, 65),
+      new MonsterVertical(136, 386, 2, 210, 610, dragonImage, 70, 65),
+      new MonsterHorizontal(467, 356, 1.1, 290, 600, dragonImage, 70, 65),
+      new MonsterVertical(516, 75, 1.1, 75, 225, dragonImage, 70, 65),
     ];
 
     strawberries = [
-      new Collectibles(40, 600, 50, 50, strawberryImg),
-      new Collectibles(400, 400, 50, 50, strawberryImg),
-      new Collectibles(70, 280, 50, 50, strawberryImg),
+      new Collectibles(303, 366, 50, 50, snowflakeImg),
+      new Collectibles(580, 611, 50, 50, snowflakeImg),
+      new Collectibles(57, 551, 50, 50, snowflakeImg),
+      new Collectibles(200, 217, 50, 50, snowflakeImg),
+      new Collectibles(610, 75, 50, 50, snowflakeImg),
+      new Collectibles(55, 78, 50, 50, snowflakeImg),
     ];
 
-    princess.resetPosition(600, 600);
+    princess.resetPosition(400, 680);
 
     currentBackground = levelBackgrounds[3];
   } else if (level === 4) {
     walls = [
-      new Wall(175, 0, 50, 240), // Top Vertical wall
-      new Wall(0, 351, 450, 50), // Middle Horizontal wall
-      new Wall(399, 143, 50, 250), // Middle long vertical wall
-      new Wall(0, 0, 32, 700), // Left side wall
-      new Wall(667, 0, 33, 700), // Right side wall
-      new Wall(0, 672, 560, 30), // Bottom wall
-      new Wall(175, 527, 50, 150), // Bottom vertical wall
-      new Wall(180, -17, 550, 50), // Top wall
-      new Wall(495, 495, 230, 50), // Right short vertical wall
-      new Wall(400, 239, 160, 50), // Middle short horizontal wall
-      new Wall(0, 0, 65, 30), //Tiny top horizontal wall
-      new Wall(492, 10, 208, 48),
+      new Wall(0, 0, 222, 30), // Top Vertical wall
+      new Wall(0, 0, 30, 704), // Middle Horizontal wall
+      new Wall(0, 511, 511, 50), // Middle long vertical wall
+      new Wall(0, 672, 208, 32), // Left side wall
+      new Wall(176, 159, 530, 50), // Right side wall
+      new Wall(319, 113, 50, 90), // Bottom wall
+      new Wall(176, 159, 50, 224), // Bottom vertical wall
+      new Wall(672, 161, 35, 550), // Top wall
+      new Wall(577, 335, 100, 50), // Right short vertical wall
+      new Wall(383, 335, 50, 190), // Middle short horizontal wall
+      new Wall(321, 673, 370, 35), //Tiny top horizontal wall
     ];
 
     monsters = [
