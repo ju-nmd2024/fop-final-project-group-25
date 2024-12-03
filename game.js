@@ -198,17 +198,17 @@ function loadLevel(level) {
     princess.resetPosition(580, 580);
   } else if (level === 2) {
     walls = [
-      new Wall(0, 0, 520, 35), // Top Vertical wall
-      new Wall(0, 0, 35, 700), // Middle Horizontal wall
-      new Wall(0, 670, 67, 35), // Middle long vertical wall
-      new Wall(175, 670, 500, 35), // Left side wall
-      new Wall(205, 550, 55, 145), // Right side wall
-      new Wall(205, 510, 216, 55), // Bottom wall
-      new Wall(30, 335, 245, 50), // Bottom vertical wall
-      new Wall(157, 158, 360, 55), // Top wall
-      new Wall(380, 188, 55, 150), // Right short vertical wall
-      new Wall(400, 239, 160, 50), // Middle short horizontal wall
-      new Wall(407, 284, 300, 55), //Tiny top horizontal wall
+      new Wall(0, 0, 520, 35),
+      new Wall(0, 0, 35, 700),
+      new Wall(0, 670, 67, 35),
+      new Wall(175, 670, 500, 35),
+      new Wall(205, 550, 55, 145),
+      new Wall(205, 510, 216, 55),
+      new Wall(30, 335, 245, 50),
+      new Wall(157, 158, 360, 55),
+      new Wall(380, 188, 55, 150),
+      new Wall(400, 239, 160, 50),
+      new Wall(407, 284, 300, 55),
       new Wall(407, 284, 300, 55),
       new Wall(670, 20, 55, 680),
       new Wall(560, 465, 300, 45),
@@ -216,8 +216,8 @@ function loadLevel(level) {
     ];
 
     monsters = [
-      new MonsterVertical(550, 40, 1.1, 40, 200, dragonImage, 70, 65),
-      new MonsterHorizontal(300, 590, 1, 300, 430, dragonImage, 70, 65), //monsnterlowest?
+      new MonsterVertical(550, 50, 1.1, 50, 200, dragonImage, 70, 65),
+      new MonsterHorizontal(300, 590, 1, 300, 430, dragonImage, 70, 65), //monsterlowest?
       new MonsterHorizontal(330, 370, 1.5, 330, 570, dragonImage, 70, 65),
     ];
 
@@ -227,6 +227,7 @@ function loadLevel(level) {
       new Collectibles(100, 400, 50, 50, mushroomImg),
       new Collectibles(150, 220, 50, 50, mushroomImg),
       new Collectibles(290, 90, 50, 50, mushroomImg),
+      new Collectibles(620, 70, 50, 50, mushroomImg),
     ];
 
     princess.resetPosition(100, 680);

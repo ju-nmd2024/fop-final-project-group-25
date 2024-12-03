@@ -27,6 +27,7 @@ export default class Princess {
     let nextY = this.y;
 
     // Position and rotation- key presses
+    //arrow key movement inspired by Garrits video at: https://pixelkind.github.io/foundationsofprogramming//programming/12-03-example
     if (keyIsDown(LEFT_ARROW)) {
       nextX -= this.speed;
       this.rotationAngle = -HALF_PI; // Turns left
@@ -50,6 +51,7 @@ export default class Princess {
       this.y = nextY;
     }
   }
+  //the lines of code connected to princesss collision with the walls were inspired by chatgpt at this link https://chatgpt.com/c/674ee26b-07c4-8003-be98-b0d7f0068d59
   collidesWithAnyWall(nextX, nextY, walls) {
     for (let wall of walls) {
       if (wall.collides(nextX, nextY, this.width, this.height)) {
