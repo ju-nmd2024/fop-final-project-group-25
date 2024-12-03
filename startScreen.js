@@ -1,6 +1,14 @@
 export default class Screen {
-  constructor(message, buttonText, buttonAction, bgImage, menuImage) {
-    this.message = message; // Message to display on the screen
+  constructor(
+    message,
+    instructions,
+    buttonText,
+    buttonAction,
+    bgImage,
+    menuImage
+  ) {
+    this.message = message;
+    this.instructions = instructions; // Message to display on the screen
     this.button = new Button(350, 420, 150, 50, buttonText, buttonAction);
     this.bgImage = bgImage;
     this.menuImage = menuImage;
@@ -15,7 +23,14 @@ export default class Screen {
     fill(255); // Text color
     textAlign(CENTER, CENTER);
     textSize(32);
-    text(this.message, 350, 240);
+    text(this.message, 350, 245);
+
+    textSize(14);
+    textFont("Courier New");
+    fill(255); // Text color
+    textAlign(CENTER, CENTER);
+    textStyle(BOLD);
+    text(this.instructions, 352, 300, 320);
 
     // Draw the button
     this.button.draw();

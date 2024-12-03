@@ -30,6 +30,7 @@ let mushroomImg;
 let snowflakeImg;
 let collectiblesImg;
 let strawberryImg;
+let flowerImg;
 
 let levelBackgrounds = {};
 let currentBackground;
@@ -50,6 +51,7 @@ function preload() {
   mushroomImg = loadImage("mushroom.png");
   snowflakeImg = loadImage("snowflake.png");
   collectiblesImg = loadImage("collectibles.png");
+  flowerImg = loadImage("flower.png");
 
   levelBackgrounds[1] = loadImage("summer-map.png");
   levelBackgrounds[2] = loadImage("autumnMap.png");
@@ -64,6 +66,7 @@ function setup() {
   if (menuImage && bgImage) {
     startScreen = new Screen(
       "Royal Escape",
+      "Use arrow keys to move. The goal is for the princess to get all of the collectibles, avoid monsters and enter the castle on the last level.",
       "Start",
       startGame,
       bgImage,
@@ -109,7 +112,7 @@ function draw() {
 
     if (currentLevel === 1 && princess.x <= 140 && princess.y <= 5) {
       nextLevel();
-    } else if (currentLevel === 2 && princess.x >= 370 && princess.y <= 10) {
+    } else if (currentLevel === 2 && princess.x >= 380 && princess.y <= 10) {
       nextLevel();
     } else if (currentLevel === 3 && princess.x >= 205 && princess.y <= 10) {
       nextLevel();
@@ -255,7 +258,7 @@ function loadLevel(level) {
 
     monsters = [
       new MonsterVertical(136, 386, 2, 210, 610, dragonImage, 70, 65),
-      new MonsterHorizontal(467, 356, 1.1, 290, 600, dragonImage, 70, 65),
+      new MonsterHorizontal(350, 356, 1.1, 350, 600, dragonImage, 70, 65),
       new MonsterVertical(516, 75, 1.1, 75, 225, dragonImage, 70, 65),
     ];
 
@@ -287,17 +290,20 @@ function loadLevel(level) {
     ];
 
     monsters = [
-      new MonsterVertical(220, 501, 3, 400, 560, dragonImage, 70, 65),
-      new MonsterHorizontal(260, 50, 3, 220, 590, dragonImage, 70, 65),
+      new MonsterVertical(520, 501, 0.7, 400, 560, dragonImage, 70, 65),
+      new MonsterVertical(280, 380, 0.7, 300, 380, dragonImage, 70, 65), // the one that doesnt move
+      new MonsterHorizontal(40, 40, 1, 40, 390, dragonImage, 70, 65), //needs to be moved
     ];
 
     strawberries = [
-      new Collectibles(40, 600, 50, 50, strawberryImg),
-      new Collectibles(400, 400, 50, 50, strawberryImg),
-      new Collectibles(70, 280, 50, 50, strawberryImg),
+      new Collectibles(65, 600, 40, 40, flowerImg),
+      new Collectibles(410, 260, 40, 40, flowerImg),
+      new Collectibles(70, 280, 40, 40, flowerImg),
+      new Collectibles(630, 75, 40, 40, flowerImg),
+      new Collectibles(580, 215, 40, 40, flowerImg),
     ];
 
-    princess.resetPosition(600, 600);
+    princess.resetPosition(280, 600);
 
     currentBackground = levelBackgrounds[4];
   }
@@ -378,9 +384,9 @@ function loseLife() {
   } else if (currentLevel === 2) {
     princess.resetPosition(100, 580);
   } else if (currentLevel === 3) {
-    princess.resetPosition(100, 600);
+    princess.resetPosition(400, 580);
   } else if (currentLevel === 4) {
-    princess.resetPosition(580, 580);
+    princess.resetPosition(280, 580);
   }
 }
 window.loseLife = loseLife;
