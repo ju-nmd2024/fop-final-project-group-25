@@ -343,20 +343,20 @@ function loadLevel(level) {
     monsters = [
       new MonsterVertical(520, 501, 1.3, 400, 560, dragonSpring, 70, 65),
       new MonsterVertical(240, 350, 1.3, 210, 380, dragonSpring, 70, 65),
+      new MonsterHorizontal(100, 110, 0.9, 40, 270, dragonSpring, 50, 45),
     ];
 
     strawberries = [
       new Collectibles(65, 600, 40, 40, flowerImg),
       new Collectibles(410, 260, 40, 40, flowerImg),
       new Collectibles(70, 280, 40, 40, flowerImg),
-      new Collectibles(630, 75, 40, 40, flowerImg),
       new Collectibles(580, 215, 40, 40, flowerImg),
     ];
 
     princess.resetPosition(280, 600);
     /*created an object literal to implement an image with specific positions and 
     size that are later used in the if statement for completing the game found here:https://playcode.io/javascript/object-literal*/
-    castle = { x: 350, y: 5, width: 110, height: 110, img: castleImg };
+    castle = { x: 320, y: -100, width: 180, height: 180, img: castleImg };
     currentBackground = levelBackgrounds[4];
   }
 }
