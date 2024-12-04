@@ -59,15 +59,15 @@ function preload() {
   dragonImage = loadImage("monster.png");
   livesBg = loadImage("livesBg.png");
   strawberryImg = loadImage("Strawberry.png");
-  mushroomImg = loadImage("mushroom.png");
+  mushroomImg = loadImage("mushroom2.png");
   snowflakeImg = loadImage("snowflake.png");
   collectiblesImg = loadImage("collectibles.png");
   flowerImg = loadImage("flower.png");
 
-  dragonSummer = loadImage("monster-summer.png");
-  dragonAutumn = loadImage("monster-autumn.png");
+  dragonSummer = loadImage("monster-summer2.png");
+  dragonAutumn = loadImage("monster-autumn2.png");
   dragonWinter = loadImage("monster-winter.png");
-  dragonSpring = loadImage("monster-spring.png");
+  dragonSpring = loadImage("monster-spring2.png");
 
   levelBackgrounds[1] = loadImage("summer-map.png");
   levelBackgrounds[2] = loadImage("autumnMap.png");
@@ -133,7 +133,7 @@ function draw() {
 
     if (currentLevel === 1 && princess.x <= 140 && princess.y <= 5) {
       nextLevel();
-    } else if (currentLevel === 2 && princess.x >= 380 && princess.y <= 10) {
+    } else if (currentLevel === 2 && princess.x >= 340 && princess.y <= 10) {
       nextLevel();
     } else if (currentLevel === 3 && princess.x >= 205 && princess.y <= 10) {
       nextLevel();
@@ -239,6 +239,7 @@ function loadLevel(level) {
       new Wall(670, 20, 55, 680),
       new Wall(560, 465, 300, 45),
       new Wall(480, 0, 220, 33),
+      new Wall(492, 10, 208, 48),
     ];
 
     monsters = [
@@ -276,6 +277,7 @@ function loadLevel(level) {
       new Wall(480, 464, 50, 240),
       new Wall(480, 673, 230, 32),
       new Wall(160, 144, 110, 50),
+      new Wall(492, 10, 208, 48),
     ];
 
     monsters = [
@@ -309,11 +311,12 @@ function loadLevel(level) {
       new Wall(577, 335, 100, 50), // Right short vertical wall
       new Wall(383, 335, 50, 190), // Middle short horizontal wall
       new Wall(321, 673, 370, 35), //Tiny top horizontal wall
+      new Wall(492, 10, 208, 48),
     ];
 
     monsters = [
-      new MonsterVertical(520, 501, 0.7, 400, 560, dragonSpring, 70, 65),
-      new MonsterVertical(280, 380, 0.7, 300, 380, dragonSpring, 70, 65), // the one that doesnt move
+      new MonsterVertical(520, 501, 1.3, 400, 560, dragonSpring, 70, 65),
+      new MonsterVertical(240, 350, 1.3, 210, 380, dragonSpring, 70, 65), // the one that doesnt move
       new MonsterHorizontal(40, 40, 1, 40, 390, dragonSpring, 70, 65), //needs to be moved
     ];
 
