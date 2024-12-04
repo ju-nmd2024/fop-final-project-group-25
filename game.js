@@ -190,11 +190,6 @@ window.draw = draw;
 function nextLevel() {
   currentLevel++;
 
-  // if (currentLevel > 4) {
-  // winGame();
-  // return;
-  //}
-
   loadLevel(currentLevel); // Load the next level
 }
 window.nextLevel = nextLevel;
@@ -343,8 +338,8 @@ function loadLevel(level) {
 
     monsters = [
       new MonsterVertical(520, 501, 1.3, 400, 560, dragonSpring, 70, 65),
-      new MonsterVertical(240, 350, 1.3, 210, 380, dragonSpring, 70, 65), // the one that doesnt move
-      new MonsterHorizontal(40, 40, 1, 40, 390, dragonSpring, 70, 65), //needs to be moved
+      new MonsterVertical(240, 350, 1.3, 210, 380, dragonSpring, 70, 65),
+      new MonsterHorizontal(40, 110, 1, 40, 300, dragonSpring, 55, 50), //needs to be moved
     ];
 
     strawberries = [
@@ -357,7 +352,7 @@ function loadLevel(level) {
 
     princess.resetPosition(280, 600);
     //created an object literal to implement an image with specific positions and size taht are later used in the if statement for completing the game found here:https://playcode.io/javascript/object-literal
-    castle = { x: 300, y: 30, width: 70, height: 70, img: castleImg };
+    castle = { x: 350, y: 5, width: 110, height: 110, img: castleImg };
     currentBackground = levelBackgrounds[4];
   }
 }
