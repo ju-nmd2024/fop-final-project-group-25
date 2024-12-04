@@ -23,7 +23,7 @@ let gameStarted = false;
 let startScreen;
 let winScreen;
 let repeatScreen;
-
+//image variables
 let bgImage;
 let menuImage;
 let menu1Image;
@@ -81,7 +81,7 @@ window.preload = preload;
 
 function setup() {
   createCanvas(700, 700);
-
+  //creating start screen
   if (menuImage && bgImage) {
     startScreen = new Screen(
       "Royal Escape",
@@ -92,7 +92,7 @@ function setup() {
       menuImage
     );
   }
-
+  //creating princess+ different images for sides
   princess = new Princess(580, 580, 55, 85, 5, {
     up: princessUpImage,
     down: princessDownImage,
@@ -122,6 +122,7 @@ function draw() {
     princess.draw();
     princess.move(walls);
 
+    //monster drawing
     for (let monster of monsters) {
       monster.update();
       monster.draw();
@@ -134,6 +135,7 @@ function draw() {
       }
     }
 
+    //checks princesses position with castle
     if (currentLevel === 4 && castle) {
       image(castle.img, castle.x, castle.y, castle.width, castle.height); //draws the castle in level 4
       let princessRight = princess.x + princess.width;
@@ -152,6 +154,7 @@ function draw() {
       }
     }
 
+    //positions at which the level switches to the next one
     if (currentLevel === 1 && princess.x <= 140 && princess.y <= 5) {
       nextLevel();
     } else if (currentLevel === 2 && princess.x >= 340 && princess.y <= 10) {
@@ -189,9 +192,9 @@ window.draw = draw;
 
 function nextLevel() {
   currentLevel++;
-
   loadLevel(currentLevel); // Load the next level
 }
+
 window.nextLevel = nextLevel;
 
 function winGame() {
@@ -265,7 +268,7 @@ function loadLevel(level) {
 
     monsters = [
       new MonsterVertical(550, 50, 1.1, 50, 200, dragonAutumn, 70, 65),
-      new MonsterHorizontal(300, 590, 1, 300, 430, dragonAutumn, 70, 65), //monsterlowest?
+      new MonsterHorizontal(300, 590, 1, 300, 430, dragonAutumn, 70, 65),
       new MonsterHorizontal(330, 370, 1.5, 330, 570, dragonAutumn, 70, 65),
     ];
 
@@ -283,17 +286,17 @@ function loadLevel(level) {
     currentBackground = levelBackgrounds[2];
   } else if (level === 3) {
     walls = [
-      new Wall(0, 0, 205, 32), // Top Vertical wall
-      new Wall(0, 0, 32, 700), // Middle Horizontal wall
-      new Wall(0, 672, 368, 32), // Middle long vertical wall
-      new Wall(0, 287, 80, 50), // Left side wall
-      new Wall(321, 0, 383, 32), // Right side wall
-      new Wall(448, 0, 50, 160), // Bottom wall
-      new Wall(672, 0, 32, 700), // Bottom vertical wall
-      new Wall(672, 0, 32, 700), // Top wall
-      new Wall(271, 146, 50, 145), // Right short vertical wall
-      new Wall(227, 287, 480, 50), // Middle short horizontal wall
-      new Wall(223, 287, 50, 256), //Tiny top horizontal wall
+      new Wall(0, 0, 205, 32),
+      new Wall(0, 0, 32, 700),
+      new Wall(0, 672, 368, 32),
+      new Wall(0, 287, 80, 50),
+      new Wall(321, 0, 383, 32),
+      new Wall(448, 0, 50, 160),
+      new Wall(672, 0, 32, 700),
+      new Wall(672, 0, 32, 700),
+      new Wall(271, 146, 50, 145),
+      new Wall(227, 287, 480, 50),
+      new Wall(223, 287, 50, 256),
       new Wall(223, 496, 110, 50),
       new Wall(480, 464, 50, 240),
       new Wall(480, 673, 230, 32),
@@ -321,25 +324,25 @@ function loadLevel(level) {
     currentBackground = levelBackgrounds[3];
   } else if (level === 4) {
     image(castleImg, 300, 300);
+
     walls = [
-      new Wall(0, 0, 222, 30), // Top Vertical wall
-      new Wall(0, 0, 30, 704), // Middle Horizontal wall
-      new Wall(0, 511, 511, 50), // Middle long vertical wall
-      new Wall(0, 672, 208, 32), // Left side wall
-      new Wall(176, 159, 530, 50), // Right side wall
-      new Wall(319, 113, 50, 90), // Bottom wall
-      new Wall(176, 159, 50, 224), // Bottom vertical wall
-      new Wall(672, 161, 35, 550), // Top wall
-      new Wall(577, 335, 100, 50), // Right short vertical wall
-      new Wall(383, 335, 50, 190), // Middle short horizontal wall
-      new Wall(321, 673, 370, 35), //Tiny top horizontal wall
-      new Wall(492, 10, 208, 48), //collectibles wall
+      new Wall(0, 0, 222, 30),
+      new Wall(0, 0, 30, 704),
+      new Wall(0, 511, 511, 50),
+      new Wall(0, 672, 208, 32),
+      new Wall(176, 159, 530, 50),
+      new Wall(319, 113, 50, 90),
+      new Wall(176, 159, 50, 224),
+      new Wall(672, 161, 35, 550),
+      new Wall(577, 335, 100, 50),
+      new Wall(383, 335, 50, 190),
+      new Wall(321, 673, 370, 35),
+      new Wall(492, 10, 208, 48),
     ];
 
     monsters = [
       new MonsterVertical(520, 501, 1.3, 400, 560, dragonSpring, 70, 65),
       new MonsterVertical(240, 350, 1.3, 210, 380, dragonSpring, 70, 65),
-      new MonsterHorizontal(40, 110, 1, 40, 300, dragonSpring, 55, 50), //needs to be moved
     ];
 
     strawberries = [
@@ -351,7 +354,8 @@ function loadLevel(level) {
     ];
 
     princess.resetPosition(280, 600);
-    //created an object literal to implement an image with specific positions and size taht are later used in the if statement for completing the game found here:https://playcode.io/javascript/object-literal
+    /*created an object literal to implement an image with specific positions and 
+    size that are later used in the if statement for completing the game found here:https://playcode.io/javascript/object-literal*/
     castle = { x: 350, y: 5, width: 110, height: 110, img: castleImg };
     currentBackground = levelBackgrounds[4];
   }
