@@ -1,9 +1,17 @@
 export default class WinScreen {
-  constructor(message, buttonText, buttonAction, bgImage) {
+  constructor(
+    message,
+    instructions,
+    buttonText,
+    buttonAction,
+    bgImage,
+    menuImage
+  ) {
     this.message = message; // Message to display on the screen
     this.button = new Button(350, 420, 150, 50, buttonText, buttonAction);
     this.bgImage = bgImage;
     this.menuImage = menuImage;
+    this.instructions = instructions;
   }
 
   draw() {
@@ -15,7 +23,14 @@ export default class WinScreen {
     fill(255); // text
     textAlign(CENTER, CENTER);
     textSize(32);
-    text(this.message, 350, 240);
+    text(this.message, 350, 260);
+    push();
+    textFont("Courier New");
+    fill(255); // text
+    textAlign(CENTER, CENTER);
+    textSize(16);
+    text(this.instructions, 352, 300, 320);
+    pop();
 
     // Draw the button
     this.button.draw();
@@ -49,7 +64,7 @@ class Button {
     //button text
     fill(255);
     textAlign(CENTER, CENTER);
-    textSize(25);
+    textSize(20);
     text(this.text, this.x, this.y);
   }
 

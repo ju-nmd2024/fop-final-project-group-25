@@ -34,6 +34,8 @@ let snowflakeImg;
 let collectiblesImg;
 let strawberryImg;
 let flowerImg;
+let castleImg;
+let castle = null;
 
 let dragonSummer;
 let dragonAutumn;
@@ -63,6 +65,7 @@ function preload() {
   snowflakeImg = loadImage("snowflake.png");
   collectiblesImg = loadImage("collectibles.png");
   flowerImg = loadImage("flower.png");
+  castleImg = loadImage("castle.png");
 
   dragonSummer = loadImage("monster-summer2.png");
   dragonAutumn = loadImage("monster-autumn2.png");
@@ -131,6 +134,24 @@ function draw() {
       }
     }
 
+    if (currentLevel === 4 && castle) {
+      image(castle.img, castle.x, castle.y, castle.width, castle.height); //draws the castle in level 4
+      let princessRight = princess.x + princess.width;
+      let princessBottom = princess.y + princess.height;
+
+      let castleRight = castle.x + castle.width;
+      let castleBottom = castle.y + castle.height;
+      if (
+        princess.x < castleRight &&
+        princessRight > castle.x &&
+        princess.y < castleBottom &&
+        princessBottom > castle.y
+      ) {
+        winGame();
+        return;
+      }
+    }
+
     if (currentLevel === 1 && princess.x <= 140 && princess.y <= 5) {
       nextLevel();
     } else if (currentLevel === 2 && princess.x >= 340 && princess.y <= 10) {
@@ -177,22 +198,24 @@ function nextLevel() {
 window.nextLevel = nextLevel;
 
 function winGame() {
-  gameStarted = false;
-  winScreen = new Screen(
+  gameStarted = false; //stops the game
+  winScreen = new WinScreen(
     "Congratulations!",
+    "You have successfully helped the princess find her way home!",
     "Play Again",
     startGame,
     bgImage,
     menuImage
   );
 }
+window.winGame = winGame;
 
 function loadLevel(level) {
   walls = [];
   monsters = [];
   strawberries = [];
 
-  currentBackground = levelBackgrounds[1];
+  currentBackground = levelBackgrounds[level];
 
   if (level === 1) {
     walls = [
@@ -219,6 +242,7 @@ function loadLevel(level) {
       new Collectibles(40, 600, 50, 50, strawberryImg),
       new Collectibles(400, 400, 50, 50, strawberryImg),
       new Collectibles(70, 280, 50, 50, strawberryImg),
+      new Collectibles(590, 120, 50, 50, strawberryImg),
     ];
 
     princess.resetPosition(580, 580);
@@ -290,7 +314,7 @@ function loadLevel(level) {
       new Collectibles(303, 366, 50, 50, snowflakeImg),
       new Collectibles(580, 611, 50, 50, snowflakeImg),
       new Collectibles(57, 551, 50, 50, snowflakeImg),
-      new Collectibles(200, 217, 50, 50, snowflakeImg),
+      new Collectibles(190, 217, 50, 50, snowflakeImg),
       new Collectibles(610, 75, 50, 50, snowflakeImg),
       new Collectibles(55, 78, 50, 50, snowflakeImg),
     ];
@@ -311,7 +335,7 @@ function loadLevel(level) {
       new Wall(577, 335, 100, 50), // Right short vertical wall
       new Wall(383, 335, 50, 190), // Middle short horizontal wall
       new Wall(321, 673, 370, 35), //Tiny top horizontal wall
-      new Wall(492, 10, 208, 48),
+      new Wall(492, 10, 208, 48), //collectibles wall
     ];
 
     monsters = [
@@ -329,7 +353,8 @@ function loadLevel(level) {
     ];
 
     princess.resetPosition(280, 600);
-
+    //created an object literal to implement an image with specific positions and size taht are later used in the if statement for completing the game found here:https://playcode.io/javascript/object-literal
+    castle = { x: 300, y: 30, width: 70, height: 70, img: castleImg };
     currentBackground = levelBackgrounds[4];
   }
 }
