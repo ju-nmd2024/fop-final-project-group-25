@@ -13,12 +13,12 @@ export default class Collectibles {
       image(this.strawberryImg, this.x, this.y, this.width, this.height);
     }
   }
- // the following 5 lines of code were inspired by help from chatgpt https://chatgpt.com/c/674ede53-e838-8003-aa06-f7f4912041be
+  // the following 5 lines of code were inspired by help from chatgpt https://chatgpt.com/share/67547229-a7fc-8013-9a65-6dd0638c7036
   checkCollected(princessX, princessY) {
     if (!this.collected) {
       let distanceX = abs(this.x - princessX);
       let distanceY = abs(this.y - princessY);
-     
+
       if (distanceX < this.width / 2 && distanceY < this.height / 2) {
         this.collected = true;
         return true;
